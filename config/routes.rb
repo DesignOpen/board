@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get 'about' => 'job_board#about'
   get 'contact' => 'job_board#contact'
   get 'login' => 'users#new'
+  get 'posts' => 'posts#new'
 
   resources :posts
 
