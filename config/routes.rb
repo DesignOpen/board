@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get 'help' => 'job_board#help'
+  get 'about' => 'job_board#about'
+  get 'contact' => 'job_board#contact'
+  get 'login' => 'users#new'
+
   resources :posts
 
   resources :users
@@ -7,7 +12,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'application#board'
+  root 'job_board#home'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
