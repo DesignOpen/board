@@ -20,7 +20,6 @@ class PostsControllerTest < ActionController::TestCase
     assert_difference('Post.count') do
       post :create, post: { contact_info: @post.contact_info, issue: @post.issue, summary: @post.summary, title: @post.title, url: @post.url, user_id: @post.user_id }
     end
-
     assert_redirected_to post_path(assigns(:post))
   end
 
