@@ -1,13 +1,16 @@
 Rails.application.routes.draw do
+  get 'sessions/new'
+
   get 'help' => 'job_board#help'
   get 'about' => 'job_board#about'
   get 'contact' => 'job_board#contact'
-  get 'login' => 'users#new'
   get 'posts' => 'posts#index'
   get 'new_post' => 'posts#new'
+  get 'login'   => 'sessions#new'
+  post 'login'   => 'sessions#create'
+  delete 'logout'  => 'sessions#destroy'
 
   resources :posts
-
   resources :users
 
   # The priority is based upon order of creation: first created -> highest priority.
