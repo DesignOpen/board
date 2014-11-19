@@ -29,6 +29,10 @@ gem 'jbuilder',             '2.2.3'
 gem 'rails-html-sanitizer', '1.0.1'
 gem 'sdoc',                 '0.4.0', group: :doc
 
+#github login
+gem 'omniauth-github',      '1.1.1'
+gem 'figaro'
+
 group :development, :test do
   gem 'sqlite3',     '1.3.9'
   gem 'byebug',      '3.4.0'

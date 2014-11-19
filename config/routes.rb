@@ -6,9 +6,15 @@ Rails.application.routes.draw do
   get 'contact' => 'job_board#contact'
   get 'posts' => 'posts#index'
   get 'new_post' => 'posts#new'
+
+
   get 'login'   => 'sessions#new'
   post 'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
+
+  # simgle login where user will see 'login via github' link
+  get '/auth/:provider/callback', :to => 'sessions#create'
+  get '/signout' => 'sessions#destroy', :as => :signout
 
   resources :posts
   resources :users
