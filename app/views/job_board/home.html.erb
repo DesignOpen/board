@@ -12,3 +12,38 @@
 
 <%= link_to image_tag("Capture.PNG", alt: "do logo"),
             'http://rubyonrails.org/' %>
+
+<table>
+<tr>
+  <th> Name </th>
+  <th> Github Account </th>
+</tr>
+<h3>List of users:</h3>
+<% @users.each do |user| %>
+  <tr>
+    <td><%= user.name %></td>
+    <td><%= user.github %></td>
+  </tr>
+<% end %>
+<table>
+<table>
+<h3>List of posts:</h3>
+<tr>
+  <th> Title </th>
+  <th> Summary </th>
+  <th> URL </th>
+  <th> Issues </th>
+  <th> Contact Info </th>
+  <th> Belongs to user </th>
+</tr>
+<% @posts.each do |post| %>
+  <tr>
+    <td><%= post.title %></td>
+    <td><%= post.summary %></td>
+    <td><%= post.url %></td>
+    <td><%= post.issue %></td>
+    <td><%= post.contact_info %></td>
+    <td><%= post.user_id %></td>
+  </tr>
+<% end %>
+<table>
