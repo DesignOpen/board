@@ -1,13 +1,22 @@
 Rails.application.routes.draw do
+  get 'sessions/new'
+
   get 'help' => 'job_board#help'
   get 'about' => 'job_board#about'
   get 'contact' => 'job_board#contact'
-  get 'login' => 'users#new'
   get 'posts' => 'posts#index'
   get 'new_post' => 'posts#new'
 
-  resources :posts
 
+  get 'login'   => 'sessions#new'
+  post 'login'   => 'sessions#create'
+  delete 'logout'  => 'sessions#destroy'
+
+  # simgle login where user will see 'login via github' link
+  get '/auth/:provider/callback', :to => 'sessions#create'
+  get '/signout' => 'sessions#destroy', :as => :signout
+
+  resources :posts
   resources :users
 
   # The priority is based upon order of creation: first created -> highest priority.
