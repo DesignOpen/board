@@ -6,7 +6,6 @@
         <li><%= link_to "Home",   root_path %></li>
         <li><%= link_to "Help",   help_path %></li>
         <li><% if current_user %>
-              <li>Welcome, <%= current_user.name %>!</li>
               <li><%= link_to "Sign Out", signout_path %></li>
             <% else %>
               <%= link_to "Login", "/auth/github" %>
