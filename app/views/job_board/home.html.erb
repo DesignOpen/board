@@ -47,3 +47,11 @@
   </tr>
 <% end %>
 <table>
+
+<%= form_tag "/static_pages/home", :method => 'post' do %>
+  <p>
+    <%= text_field_tag "search[title]", params.has_key?("search") &&
+    params[:search].has_key?("title") ? params[:search][:title] : "" %>
+    <%= submit_tag " Search Database Records " %>
+  </p>
+<% end %>
