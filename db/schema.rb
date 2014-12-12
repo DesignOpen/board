@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141119105232) do
+ActiveRecord::Schema.define(version: 20141212123254) do
 
   create_table "posts", force: true do |t|
     t.string   "title"
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20141119105232) do
     t.text     "url"
     t.text     "issue"
     t.text     "contact_info"
-    t.integer  "user_id"
+    t.string   "user_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end

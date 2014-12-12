@@ -1,6 +1,33 @@
+<% provide(:title, "Edit post") %>
 <h1>Editing Post</h1>
 
-<%= render 'form' %>
+<%= form_for(@post) do |f| %>
+    <%= render 'shared/error_messages' %>
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title, class: 'form-control' %>
+  </div>
+  <div class="field">
+    <%= f.label :summary %><br>
+    <%= f.text_area :summary, class: 'form-control' %>
+  </div>
+  <div class="field">
+    <%= f.label :url %><br>
+    <%= f.text_area :url, class: 'form-control' %>
+  </div>
+  <div class="field">
+    <%= f.label :issue %><br>
+    <%= f.text_area :issue, class: 'form-control' %>
+  </div>
+  <div class="field">
+    <%= f.label :contact_info %><br>
+    <%= f.text_area :contact_info, class: 'form-control' %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Save changes", class: "btn btn-primary" %>
+  </div>
+<% end %>
 
 <%= link_to 'Show', @post %> |
 <%= link_to 'Back', posts_path %>
