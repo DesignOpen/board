@@ -7,7 +7,6 @@
   </h2>
   <% if !logged_in? %>
     <%= link_to "Log in!", "/auth/github", class: "btn btn-lg btn-primary" %>
-    <%= link_to "Create a job post!", new_post_path, class: "btn btn-lg btn-primary" %>
   <% else %>
     <%= link_to "Create a job post!", new_post_path, class: "btn btn-lg btn-primary" %>
   <% end %>  
