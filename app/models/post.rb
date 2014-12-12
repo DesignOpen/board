@@ -4,5 +4,5 @@ class Post < ActiveRecord::Base
       uniqueness: { case_sensitive: false }
   validates :url, presence: true
   validates :contact_info, presence: true
-  validates :user_id, presence: true
+  # validates :user_id, presence: true
 end

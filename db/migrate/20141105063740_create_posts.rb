@@ -6,7 +6,7 @@ class CreatePosts < ActiveRecord::Migration
       t.text :url
       t.text :issue
       t.text :contact_info
-      t.integer :user_id
+      t.text :user_id
 
       t.timestamps null: false
     end

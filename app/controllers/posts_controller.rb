@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :logged_in_user, only: [:create, :edit, :update, :destroy]
+  before_action :correct_user, only: [:edit, :update, :destroy]
 
   # GET /posts
   # GET /posts.json
@@ -20,12 +21,14 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
+    @post = Post.find(params[:id])
   end
 
   # POST /posts
   # POST /posts.json
   def create
     @post = Post.new(post_params)
+    @post.user_id = current_user[:id]
 
     respond_to do |format|
       if @post.save
@@ -65,8 +68,20 @@ class PostsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_post
-      @post = Post.find(params[:id])
+    def logged_in_user
+      unless logged_in?
+        flash[:danger] = "Please log in."
+        redirect_to "/auth/github"
+      end
+    end
+
+    # Confirms the correct user. 
+    def correct_user
+      @post = Post.find(params[:id])  
+      if @post.user_id.to_i != current_user[:id].to_i
+        flash[:danger] = "You are not the owner"  
+        redirect_to posts_url
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
