@@ -5,4 +5,9 @@ class Post < ActiveRecord::Base
   validates :url, presence: true
   validates :contact_info, presence: true
   validates :user_id, presence: true
+
+  def self.search(query)
+    where("title like ?", "%#{query}%")
+  end
+
 end
