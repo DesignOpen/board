@@ -1,0 +1,8 @@
+language: node_js
+node_js:
+  - 0.10
+before_script:
+  - cd backend && npm install
+  - cd frontend && npm install
+script:
+  - cd backend && npm test
