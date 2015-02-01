@@ -8,6 +8,8 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var errorhandler = require('errorhandler');
 
+var routes = require('./routes');
+
 if (!process.env.SERVER_PORT) {
     console.error('Environment variables not set!')
     console.error('In local development, use command:');
@@ -53,6 +55,9 @@ app.use(session({
     saveUninitialized: true,
     resave: true
 }));
+
+// Initialize routes
+routes.initRoutes(app);
 
 // Start server
 var port = process.env.SERVER_PORT;
