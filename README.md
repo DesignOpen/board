@@ -1,6 +1,10 @@
+# Design Open Board
+
+Job board which open source projects can use to find design contributors.
+
 ## Install
 
-https://travis-ci.org/DesignOpen/board.svg
+![Build status](https://travis-ci.org/DesignOpen/board.svg)
 
 Requirements
 
@@ -20,10 +24,16 @@ Install backend and frontend npm modules:
     cd backend && npm install
     cd frontend && npm install
 
+Add environment variables to `backend/local-env.sh`. See [backend/local-env.sh.sample](backend/local-env.sh.sample) for an example configuration.
+
 
 ## API
 
-Model Post
+### Models
+
+#### Post
+
+```
 {
     "description": "",
     "author": "",
@@ -33,9 +43,13 @@ Model Post
     "content": "",
     "title": ""
 }
+```
 
-User
+#### User
+
+```
 {
     "name": "",
     "github_user":
 }
+```

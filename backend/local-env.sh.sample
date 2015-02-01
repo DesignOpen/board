@@ -1,0 +1,19 @@
+# Sample configuration for environment variables in local development
+# You should have all environment variables set in backend/local-env.sh
+# to run the backend
+
+# For GitHub integration
+export GITHUB_CLIENT_ID=
+export GITHUB_CLIENT_SECRET=
+
+# Defines which port backend runs on
+export SERVER_PORT=
+
+# Just use MONGOLAB_URI name for local development too
+export MONGOLAB_URI=
+
+# Long secret key for sessions
+export SESSION_SECRET=
+
+export PS1="[board] $PS1"
+echo "Environment variables set!"
