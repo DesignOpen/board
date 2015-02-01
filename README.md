@@ -1,5 +1,7 @@
 ## Install
 
+https://travis-ci.org/DesignOpen/board.svg
+
 Requirements
 
 * node + npm tools
