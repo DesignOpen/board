@@ -1,11 +1,11 @@
 {
-  "name": "designopen-board",
+  "name": "designopen-board-frontend",
   "version": "0.0.0",
   "description": "",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": ""
   },
-  "author": "Kimmo Brunfeldt <kimmobrunfeldt@gmail.com> (http://kimmobrunfeldt.github.io/)",
+  "author": "",
   "license": "GPLv3"
 }
