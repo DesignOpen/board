@@ -7,7 +7,7 @@ function createPost(name) {
         name: name
     });
 
-    post.save();
+    return post.saveAsync();
 }
 
 function getPosts() {

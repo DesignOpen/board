@@ -14,7 +14,11 @@ function getPostById(req, res, next) {
 }
 
 function postPost(req, res, next) {
-
+    postService.createPost(req.body.name)
+    .then(function(post) {
+        req.json(post);
+    })
+    .catch(next);
 }
 
 module.exports = {
