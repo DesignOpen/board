@@ -1,7 +1,10 @@
 var fs = require('fs');
 var path = require('path');
 
+var Promise = require('bluebird');
 var mongoose = require('mongoose');
+Promise.promisifyAll(mongoose);
+
 var express = require('express');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
@@ -11,7 +14,7 @@ var errorhandler = require('errorhandler');
 var routes = require('./routes');
 
 if (!process.env.MONGOLAB_URI) {
-    console.error('Environment variables not set!')
+    console.error('Environment variables not set!');
     console.error('In local development, use command:');
     console.error('\n    source local-env.sh\n');
     console.error('before starting the server.');
