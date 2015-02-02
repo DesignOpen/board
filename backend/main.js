@@ -10,7 +10,7 @@ var errorhandler = require('errorhandler');
 
 var routes = require('./routes');
 
-if (!process.env.SERVER_PORT) {
+if (!process.env.MONGOLAB_URI) {
     console.error('Environment variables not set!')
     console.error('In local development, use command:');
     console.error('\n    source local-env.sh\n');
@@ -60,7 +60,7 @@ app.use(session({
 routes.initRoutes(app);
 
 // Start server
-var port = process.env.SERVER_PORT;
+var port = process.env.PORT;
 var server = app.listen(port || 80, function() {
     console.log(
         'Express server listening on port %d in %s mode',
