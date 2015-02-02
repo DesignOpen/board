@@ -11,8 +11,6 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var errorhandler = require('errorhandler');
 
-var routes = require('./routes');
-
 if (!process.env.MONGOLAB_URI) {
     console.error('Environment variables not set!');
     console.error('In local development, use command:');
@@ -59,7 +57,9 @@ app.use(session({
     resave: true
 }));
 
-// Initialize routes
+// Initialize routes. This must be done after models are registered
+// for mongoose
+var routes = require('./routes');
 routes.initRoutes(app);
 
 // Start server

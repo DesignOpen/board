@@ -8,7 +8,7 @@ function createUser(name, githubAccount) {
         githubAccount: githubAccount
     });
 
-    user.save();
+    return user.saveAsync();
 }
 
 function getUsers() {

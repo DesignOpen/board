@@ -1,10 +1,21 @@
 var userService = require('../services/user-service');
 
 
-function getPosts(req, res, next) {
+function getUsers(req, res, next) {
 
 }
 
+function getUserById(req, res, next) {
+
+}
+
+function postUser(req, res, next) {
+
+}
+
+
 module.exports = {
-    getPosts: getPosts
+    getUsers: getUsers,
+    getUserById: getUserById,
+    postUser: postUser,
 };
