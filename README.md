@@ -29,6 +29,31 @@ Add environment variables to `backend/local-env.sh`. See [backend/local-env.sh.s
 
 ## API
 
+
+### Routes
+
+Get user
+    GET /users
+
+Create user
+    POST /users
+
+Get user with id
+    GET /users/:id
+
+Update user with id
+    PUT /users/:id
+
+Create new post
+    POST /posts
+
+Get post with id
+    GET /posts/:id
+
+Update post with id
+    PUT /posts/:id
+
+
 ### Models
 
 #### Post
