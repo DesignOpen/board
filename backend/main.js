@@ -34,6 +34,7 @@ fs.readdirSync(modelsPath).forEach(function (file) {
 });
 
 var app = express();
+app.set('json spaces', 2);
 
 var nodeEnv = process.env.NODE_ENV;
 if (nodeEnv === 'development') {
