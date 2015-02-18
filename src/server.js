@@ -11,8 +11,6 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var errorhandler = require('errorhandler');
 var winston = require('winston');
-// Requiring `winston-papertrail` will expose `winston.transports.Papertrail`
-require('winston-papertrail');
 
 // Setup logging
 var logger = new winston.Logger({
@@ -21,22 +19,13 @@ var logger = new winston.Logger({
     ]
 });
 
-var paperTrail;
-if (process.env.NODE_ENV === 'production') {
-    paperTrail = new winston.transports.Papertrail({
-        host: 'logs.papertrailapp.com',
-        port: 12345
-    });
-
-    logger.add(paperTrail);
-    logger.error('TESTING');
-}
+logger.error('TESTING');
 
 if (!process.env.MONGOLAB_URI) {
-    console.error('Environment variables not set!');
-    console.error('In local development, use command:');
-    console.error('\n    source local-env.sh\n');
-    console.error('before starting the server.');
+    logger.error('Environment variables not set!');
+    logger.error('In local development, use command:');
+    logger.error('\n    source local-env.sh\n');
+    logger.error('before starting the server.');
     process.exit(1);
 }
 
@@ -87,7 +76,7 @@ routes.initRoutes(app);
 // Start server
 var port = process.env.PORT;
 var server = app.listen(port || 80, function() {
-    console.log(
+    logger.info(
         'Express server listening on port %d in %s mode',
         port,
         app.get('env')
@@ -96,10 +85,10 @@ var server = app.listen(port || 80, function() {
 
 // Handle SIGTERM gracefully. Heroku will send this before idle.
 process.on('SIGTERM', function() {
-    console.log('SIGTERM received');
-    console.log('Close express server');
+    logger.info('SIGTERM received');
+    logger.info('Close express server');
     server.close(function() {
-        console.log('Close mongodb connection');
+        logger.info('Close mongodb connection');
         mongoose.disconnect();
     });
 
