@@ -33,7 +33,7 @@ if (!process.env.MONGOLAB_URI) {
 var config = require('./config');
 
 // Connect to database
-var db = mongoose.connect(process.env.MONGOLAB_URI, config.mongoOptions);
+mongoose.connect(process.env.MONGOLAB_URI, config.mongoOptions);
 
 // Bootstrap models
 var modelsPath = path.join(__dirname, '/models');
