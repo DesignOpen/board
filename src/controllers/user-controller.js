@@ -14,7 +14,11 @@ function getUserById(req, res, next) {
 }
 
 function postUser(req, res, next) {
-
+    userService.createUser(req.body.name, req.body.githubAccount)
+    .then(function(user){
+        req.json(user);
+    })
+    .catch(next);
 }
 
 module.exports = {

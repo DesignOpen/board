@@ -24,7 +24,7 @@ Install backend and frontend npm modules:
     cd backend && npm install
     cd frontend && npm install
 
-Add environment variables to `backend/local-env.sh`. See [backend/local-env.sh.sample](backend/local-env.sh.sample) for an example configuration.
+Add environment variables to `backend/local-env.sh`. See [local-env.sh.sample](local-env.sh.sample) for an example configuration.
 
 
 ## API
