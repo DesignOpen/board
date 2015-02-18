@@ -10,16 +10,16 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var errorhandler = require('errorhandler');
-var winston = require('winston');
+var log4js = require('log4js');
 
-// Setup logging
-var logger = new winston.Logger({
-    transports: [
-        new winston.transports.Console()
-    ]
-});
-
-logger.error('TESTING');
+var logger = log4js.getLogger(path.basename(__filename));
+if (process.env.NODE_ENV === 'production') {
+    // Disable colors in production
+    log4js.configure({
+        appenders: [{type: 'console', layout: {type: 'basic' }}],
+        replaceConsole: true
+    });
+}
 
 if (!process.env.MONGOLAB_URI) {
     logger.error('Environment variables not set!');
@@ -45,6 +45,9 @@ fs.readdirSync(modelsPath).forEach(function (file) {
 
 var app = express();
 app.set('json spaces', 2);
+
+// Add request logging
+app.use(log4js.connectLogger(logger));
 
 var nodeEnv = process.env.NODE_ENV;
 if (nodeEnv === 'development') {
@@ -91,9 +94,6 @@ process.on('SIGTERM', function() {
         logger.info('Close mongodb connection');
         mongoose.disconnect();
     });
-
-    // Close underlying logging connections
-    logger.close();
 });
 
 // Expose app
