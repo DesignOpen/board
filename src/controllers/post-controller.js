@@ -21,8 +21,17 @@ function postPost(req, res, next) {
     .catch(next);
 }
 
+function deletePostById(req, res, next) {
+    postService.deletePostById(req.body.id)
+    .then(function(post) {
+        res.json(post);
+    })
+    .catch(next);
+}
+
 module.exports = {
     getPosts: getPosts,
     getPostById: getPostById,
-    postPost: postPost
+    postPost: postPost,
+    deletePostById: deletePostById
 };
