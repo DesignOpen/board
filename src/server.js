@@ -10,6 +10,27 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var errorhandler = require('errorhandler');
+var winston = require('winston');
+// Requiring `winston-papertrail` will expose `winston.transports.Papertrail`
+require('winston-papertrail');
+
+// Setup logging
+var logger = new winston.Logger({
+    transports: [
+        new winston.transports.Console()
+    ]
+});
+
+var paperTrail;
+if (process.env.NODE_ENV === 'production') {
+    paperTrail = new winston.transports.Papertrail({
+        host: 'logs.papertrailapp.com',
+        port: 12345
+    });
+
+    logger.add(paperTrail);
+    logger.error('TESTING');
+}
 
 if (!process.env.MONGOLAB_URI) {
     console.error('Environment variables not set!');
@@ -81,6 +102,9 @@ process.on('SIGTERM', function() {
         console.log('Close mongodb connection');
         mongoose.disconnect();
     });
+
+    // Close underlying logging connections
+    logger.close();
 });
 
 // Expose app

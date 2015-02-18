@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "test": "exit 1",
-    "start": "node backend/main.js"
+    "start": "node src/server.js"
   },
   "author": "",
   "license": "GPLv3",
@@ -17,6 +17,8 @@
     "express": "4.11.2",
     "express-session": "1.10.2",
     "mongoose": "3.8.22",
-    "passport": "^0.2.1"
+    "passport": "^0.2.1",
+    "winston": "^0.9.0",
+    "winston-papertrail": "^1.0.1"
   }
 }

@@ -1,10 +1,12 @@
 # Design Open Board
 
+![Build status](https://travis-ci.org/DesignOpen/board.svg)
+
 Job board which open source projects can use to find design contributors.
 
-## Install
+## Install development environment
 
-![Build status](https://travis-ci.org/DesignOpen/board.svg)
+
 
 Requirements
 
