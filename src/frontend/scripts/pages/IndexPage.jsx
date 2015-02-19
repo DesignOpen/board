@@ -6,8 +6,10 @@ var Link = ReactRouter.Link;
 var Index = React.createClass({
     render: function render() {
         return (
-            <div className="">
+            <div className="page">
                 <h1>Index</h1>
+
+                <h3>November</h3>
                 <Link to="project" params={{id: 0}}>Project 0</Link>
             </div>
         );
