@@ -14,6 +14,10 @@ function getPosts() {
     return Post.findAsync({});
 }
 
+function getPostById(id) {
+    return Post.findOneAsync({_id: id});
+}
+
 function deletePostById(id){
     return Post.removeAsync({_id: id});
 }
@@ -26,6 +30,7 @@ function updatePostById(id, name) {
 module.exports = {
     createPost: createPost,
     getPosts: getPosts,
+    getPostById: getPostById,
     deletePostById: deletePostById,
     updatePostById: updatePostById
 };

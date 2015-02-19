@@ -10,7 +10,11 @@ function getPosts(req, res, next) {
 }
 
 function getPostById(req, res, next) {
-
+    postService.getPostById(req.params.id)
+    .then(function(post) {
+        res.json(post);
+    })
+    .catch(next);
 }
 
 function postPost(req, res, next) {
