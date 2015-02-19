@@ -44,14 +44,18 @@ fs.readdirSync(modelsPath).forEach(function (file) {
 });
 
 var app = express();
-app.set('json spaces', 2);
+
+if (process.env.NODE_ENV !== 'production') {
+    // Pretty print JSON responses in development
+    app.set('json spaces', 2);
+}
 
 // Add request logging
 app.use(log4js.connectLogger(logger));
 
 var nodeEnv = process.env.NODE_ENV;
 if (nodeEnv === 'development') {
-    // Disable caching of scripts for easier testing
+    // Disable caching for easier testing
     app.use(function noCache(req, res, next) {
         res.header('Cache-Control', 'no-cache, no-store, must-revalidate');
         res.header('Pragma', 'no-cache');

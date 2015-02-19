@@ -3,7 +3,14 @@
 .tmp
 bower_components
 .DS_Store
+
+# Secrets
 local-env.sh
+
+# Built frontend files
+bundle.js
+bundle.css
+
 
 # Taken from https://github.com/github/gitignore/blob/master/Node.gitignore
 

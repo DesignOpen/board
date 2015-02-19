@@ -2,6 +2,7 @@ var postController = require('./controllers/post-controller');
 var userController = require('./controllers/user-controller');
 var categoryController = require('./controllers/category-controller');
 
+
 function initRoutes(app) {
     app.get('/', function(req, res) {
         res.json({test: 1});
