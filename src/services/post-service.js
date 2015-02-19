@@ -15,7 +15,7 @@ function getPosts() {
 }
 
 function deletePostById(id){
-    return Post.removeAsync({id: id});
+    return Post.removeAsync({_id: id});
 }
 
 module.exports = {

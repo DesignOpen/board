@@ -22,11 +22,12 @@ function postPost(req, res, next) {
 }
 
 function deletePostById(req, res, next) {
-    postService.deletePostById(req.body.id)
+    postService.deletePostById(req.params.id)
     .then(function(post) {
         res.json(post);
     })
-    .catch(next);
+    .catch(function(next) {
+    });
 }
 
 module.exports = {
