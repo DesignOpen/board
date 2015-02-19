@@ -1,4 +1,3 @@
-var path = require('path');
 var express = require('express');
 require('node-jsx').install();
 var React = require('react');
@@ -8,6 +7,7 @@ var postController = require('./controllers/post-controller');
 var userController = require('./controllers/user-controller');
 var categoryController = require('./controllers/category-controller');
 
+var config = require('./config');
 var routes = require('./frontend/scripts/routes.jsx');
 
 
@@ -28,19 +28,24 @@ function initRoutes(app) {
     app.delete('/api/categories/:id', categoryController.deleteCategoryById);
     app.put('/api/categories/:id', categoryController.putCategoryById);
 
-    app.use('/', express.static(path.join(__dirname, 'frontend'), {
+    app.use('/', express.static(config.serveDir, {
         // We don't want that / would serve /index.html, because that is
         // handled in the all-catching route
         index: false
     }));
 
     app.use('*', function(req, res) {
-        ReactRouter.run(routes, function renderHandler(Component, state) {
-            var component = React.createElement(Component, {
+        console.log(req.originalUrl)
+        ReactRouter.run(routes, req.originalUrl, function(Handler, state) {
+            console.log(state)
+
+            // TODO: fetch data here and after that, render initial html
+
+            var handler = React.createElement(Handler, {
                 params: state.params,
                 query: state.query
             });
-            var initialHtml = React.renderToString(component);
+            var initialHtml = React.renderToString(handler);
 
             res.render('index.html', {initialHtml: initialHtml});
         });

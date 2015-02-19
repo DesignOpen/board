@@ -53,7 +53,7 @@ if (process.env.NODE_ENV !== 'production') {
 // Set view engine to ejs
 app.engine('html', require('ejs').renderFile);
 // Find all node-side views inside frontend folder
-app.set('views', path.join(__dirname, 'frontend'));
+app.set('views', config.serveDir);
 
 // Add request logging
 app.use(log4js.connectLogger(logger));

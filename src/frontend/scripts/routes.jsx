@@ -10,10 +10,10 @@ var NotFound = require('./components/NotFound.jsx');
 
 
 var routes = (
-  <Route path="/" handler={App}>
-    <Route path="login" handler={Login} />
-    <NotFoundRoute handler={NotFound}/>
-  </Route>
+    <Route name="index" path="/" handler={App}>
+        <Route name="login" path="login" handler={Login}/>
+        <NotFoundRoute handler={NotFound}/>
+    </Route>
 );
 
 module.exports = routes;

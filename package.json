@@ -2,7 +2,7 @@
   "name": "designopen-board",
   "version": "0.0.0",
   "description": "",
-  "main": "main.js",
+  "main": "src/server.js",
   "author": "",
   "license": "GPLv3",
   "dependencies": {
@@ -20,20 +20,20 @@
     "react": "^0.12.2",
     "react-router": "^0.12.0"
   },
+  "devDependencies": {
+    "reactify": "^1.0.0"
+  },
   "scripts": {
     "tmux": "./tools/tmux",
     "start": "node src/server.js",
-    "debug-server": "node-debug --debug-brk false src/server.js",
+    "debug-server": "node-debug --debug-brk=0 src/server.js",
     "build": "npm run build-js && npm run build-less",
-    "build-js": "browserify src/frontend/scripts/main.jsx -t reactify -o src/frontend/bundle.js",
+    "build-js": "browserify src/frontend/scripts/main.jsx -t reactify -o public/bundle.js",
     "build-styles": "npm run build-stylus && npm run autoprefixer",
-    "build-stylus": "stylus --include-css -o src/frontend/bundle.css src/frontend/styles/main.styl",
-    "autoprefixer": "autoprefixer src/frontend/bundle.css",
+    "build-stylus": "stylus --include-css -o public/bundle.css src/frontend/styles/main.styl",
+    "autoprefixer": "autoprefixer public/bundle.css",
     "watch": "npm run watch-js & npm run watch-styles",
-    "watch-js": "watchify src/frontend/scripts/main.jsx -d -v -t reactify -o src/frontend/bundle.js",
+    "watch-js": "watchify src/frontend/scripts/main.jsx -d -v -t reactify -o public/bundle.js",
     "watch-styles": "watch 'npm run build-styles' src/frontend/styles/"
-  },
-  "devDependencies": {
-    "reactify": "^1.0.0"
   }
 }
