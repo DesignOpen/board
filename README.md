@@ -51,7 +51,12 @@ In project root:
 
 ## Development
 
-To start local server, run `npm start` in the root of the project.
+To start local server:
+
+* In first terminal, run `npm start` in the root of the project
+* In second terminal, run `npm run watch`. That'll watch changes in stulys and jsx files.
+
+There's no live reload.
 
 ### Releasing
 
