@@ -35,9 +35,7 @@ function initRoutes(app) {
     }));
 
     app.use('*', function(req, res) {
-        console.log(req.originalUrl)
         ReactRouter.run(routes, req.originalUrl, function(Handler, state) {
-            console.log(state)
 
             // TODO: fetch data here and after that, render initial html
 
