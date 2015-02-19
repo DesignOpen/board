@@ -1,13 +1,17 @@
+var path = require('path');
+var express = require('express');
+require('node-jsx').install();
+var React = require('react');
+var ReactRouter = require('react-router');
+
 var postController = require('./controllers/post-controller');
 var userController = require('./controllers/user-controller');
 var categoryController = require('./controllers/category-controller');
 
+var routes = require('./frontend/scripts/routes.jsx');
+
 
 function initRoutes(app) {
-    app.get('/', function(req, res) {
-        res.json({test: 1});
-    });
-
     app.get('/api/posts', postController.getPosts);
     app.get('/api/posts/:id', postController.getPostById);
     app.post('/api/posts', postController.postPost);
@@ -24,6 +28,23 @@ function initRoutes(app) {
     app.delete('/api/categories/:id', categoryController.deleteCategoryById);
     app.put('/api/categories/:id', categoryController.putCategoryById);
 
+    app.use('/', express.static(path.join(__dirname, 'frontend'), {
+        // We don't want that / would serve /index.html, because that is
+        // handled in the all-catching route
+        index: false
+    }));
+
+    app.use('*', function(req, res) {
+        ReactRouter.run(routes, function renderHandler(Component, state) {
+            var component = React.createElement(Component, {
+                params: state.params,
+                query: state.query
+            });
+            var initialHtml = React.renderToString(component);
+
+            res.render('index.html', {initialHtml: initialHtml});
+        });
+    });
 }
 
 module.exports = {

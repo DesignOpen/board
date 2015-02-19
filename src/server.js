@@ -50,6 +50,11 @@ if (process.env.NODE_ENV !== 'production') {
     app.set('json spaces', 2);
 }
 
+// Set view engine to ejs
+app.engine('html', require('ejs').renderFile);
+// Find all node-side views inside frontend folder
+app.set('views', path.join(__dirname, 'frontend'));
+
 // Add request logging
 app.use(log4js.connectLogger(logger));
 
@@ -74,6 +79,7 @@ app.use(session({
     saveUninitialized: true,
     resave: true
 }));
+
 
 // Initialize routes. This must be done after models are registered
 // for mongoose
