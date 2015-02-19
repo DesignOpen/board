@@ -23,16 +23,24 @@ function postPost(req, res, next) {
 
 function deletePostById(req, res, next) {
     postService.deletePostById(req.params.id)
-    .then(function(post) {
-        res.json(post);
+    .then(function(query) {
+        res.json(query);
     })
-    .catch(function(next) {
-    });
+    .catch(next);
+}
+
+function putPostById(req, res, next) {
+    postService.updatePostById(req.params.id, req.body.name)
+    .then(function(query) {
+        res.json(query);
+    })
+    .catch(next);
 }
 
 module.exports = {
     getPosts: getPosts,
     getPostById: getPostById,
     postPost: postPost,
-    deletePostById: deletePostById
+    deletePostById: deletePostById,
+    putPostById: putPostById
 };

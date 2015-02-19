@@ -10,6 +10,7 @@ function initRoutes(app) {
     app.get('/api/posts/:id', postController.getPostById);
     app.post('/api/posts', postController.postPost);
     app.delete('/api/posts/:id', postController.deletePostById);
+    app.put('/api/posts/:id', postController.putPostById);
 
     app.get('/api/users', userController.getUsers);
     app.get('/api/users/:id', userController.getUserById);
