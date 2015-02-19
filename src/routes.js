@@ -1,6 +1,9 @@
 var postController = require('./controllers/post-controller');
 var userController = require('./controllers/user-controller');
 var categoryController = require('./controllers/category-controller');
+var authController = require('./controllers/auth-controller');
+
+var passport = require('passport');
 
 function initRoutes(app) {
     app.get('/', function(req, res) {
@@ -23,6 +26,9 @@ function initRoutes(app) {
     app.delete('/api/categories/:id', categoryController.deleteCategoryById);
     app.put('/api/categories/:id', categoryController.putCategoryById);
 
+    // Route for GitHub auth
+    app.get('/auth/github', passport.authenticate('github'));
+    app.get('/auth/github/callback', authController.getGithubCallback);
 }
 
 module.exports = {
