@@ -1,0 +1,1 @@
+curl -X POST -H "Content-Type: application/json" -d '{"name":"test"}' http://localhost:9000/api/posts

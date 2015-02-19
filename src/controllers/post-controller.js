@@ -16,7 +16,15 @@ function getPostById(req, res, next) {
 function postPost(req, res, next) {
     postService.createPost(req.body.name)
     .then(function(post) {
-        req.json(post);
+        res.json(post);
+    })
+    .catch(next);
+}
+
+function deletePostById(req, res, next) {
+    postService.deletePostById(req.body.id)
+    .then(function(post) {
+        res.json(post);
     })
     .catch(next);
 }
@@ -24,5 +32,6 @@ function postPost(req, res, next) {
 module.exports = {
     getPosts: getPosts,
     getPostById: getPostById,
-    postPost: postPost
+    postPost: postPost,
+    deletePostById: deletePostById
 };

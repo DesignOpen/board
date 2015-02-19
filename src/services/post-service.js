@@ -14,8 +14,12 @@ function getPosts() {
     return Post.findAsync({});
 }
 
+function deletePostById(id){
+    return Post.removeAsync({id: id});
+}
 
 module.exports = {
     createPost: createPost,
-    getPosts: getPosts
+    getPosts: getPosts,
+    deletePostById: deletePostById
 };

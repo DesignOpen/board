@@ -10,12 +10,22 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var errorhandler = require('errorhandler');
+var log4js = require('log4js');
+
+var logger = log4js.getLogger(path.basename(__filename));
+if (process.env.NODE_ENV === 'production') {
+    // Disable colors in production
+    log4js.configure({
+        appenders: [{type: 'console', layout: {type: 'basic' }}],
+        replaceConsole: true
+    });
+}
 
 if (!process.env.MONGOLAB_URI) {
-    console.error('Environment variables not set!');
-    console.error('In local development, use command:');
-    console.error('\n    source local-env.sh\n');
-    console.error('before starting the server.');
+    logger.error('Environment variables not set!');
+    logger.error('In local development, use command:');
+    logger.error('\n    source local-env.sh\n');
+    logger.error('before starting the server.');
     process.exit(1);
 }
 
@@ -23,7 +33,7 @@ if (!process.env.MONGOLAB_URI) {
 var config = require('./config');
 
 // Connect to database
-var db = mongoose.connect(process.env.MONGOLAB_URI, config.mongoOptions);
+mongoose.connect(process.env.MONGOLAB_URI, config.mongoOptions);
 
 // Bootstrap models
 var modelsPath = path.join(__dirname, '/models');
@@ -35,6 +45,9 @@ fs.readdirSync(modelsPath).forEach(function (file) {
 
 var app = express();
 app.set('json spaces', 2);
+
+// Add request logging
+app.use(log4js.connectLogger(logger));
 
 var nodeEnv = process.env.NODE_ENV;
 if (nodeEnv === 'development') {
@@ -66,7 +79,7 @@ routes.initRoutes(app);
 // Start server
 var port = process.env.PORT;
 var server = app.listen(port || 80, function() {
-    console.log(
+    logger.info(
         'Express server listening on port %d in %s mode',
         port,
         app.get('env')
@@ -75,10 +88,10 @@ var server = app.listen(port || 80, function() {
 
 // Handle SIGTERM gracefully. Heroku will send this before idle.
 process.on('SIGTERM', function() {
-    console.log('SIGTERM received');
-    console.log('Close express server');
+    logger.info('SIGTERM received');
+    logger.info('Close express server');
     server.close(function() {
-        console.log('Close mongodb connection');
+        logger.info('Close mongodb connection');
         mongoose.disconnect();
     });
 });

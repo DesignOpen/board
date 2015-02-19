@@ -1,4 +1,5 @@
 {
+  "predef": ["Promise"],
   "node": true,
   "browser": true,
   "bitwise": true,
