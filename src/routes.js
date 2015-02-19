@@ -2,6 +2,9 @@ var express = require('express');
 require('node-jsx').install();
 var React = require('react');
 var ReactRouter = require('react-router');
+var path = require('path');
+var log4js = require('log4js');
+var logger = log4js.getLogger(path.basename(__filename));
 
 var postController = require('./controllers/post-controller');
 var userController = require('./controllers/user-controller');
@@ -36,6 +39,7 @@ function initRoutes(app) {
 
     app.use('*', function(req, res) {
         ReactRouter.run(routes, req.originalUrl, function(Handler, state) {
+            logger.debug('Initially render', req.originalUrl);
 
             // TODO: fetch data here and after that, render initial html
 
