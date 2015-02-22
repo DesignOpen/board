@@ -46,18 +46,18 @@ fs.readdirSync(modelsPath).forEach(function (file) {
 
 var app = express();
 
-if (process.env.NODE_ENV !== 'production') {
-    // Pretty print JSON responses in development
-    app.set('json spaces', 2);
-}
-
 // Set view engine to ejs
 app.engine('html', require('ejs').renderFile);
 // Find all node-side views inside frontend folder
 app.set('views', config.serveDir);
 
-// Add request logging
-app.use(log4js.connectLogger(logger));
+if (process.env.NODE_ENV !== 'production') {
+    // Pretty print JSON responses in development
+    app.set('json spaces', 2);
+
+    // Add request logging
+    app.use(log4js.connectLogger(logger));
+}
 
 var nodeEnv = process.env.NODE_ENV;
 if (nodeEnv === 'development') {
