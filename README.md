@@ -66,8 +66,13 @@ Release flow:
 2. Wait for green light in CI
 3. Push changes to desired environment, for example **qa**:
 
+    ```bash
     git checkout master
     git push qa
+    ```
+
+    You can also release a certain local branch. For example releasing from node branch to **qa**: ```git push qa node:master```
+
 
 4. Check that the environment responds and logs look ok
 
