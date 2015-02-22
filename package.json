@@ -15,6 +15,7 @@
   "dependencies": {
     "bluebird": "^2.9.4",
     "body-parser": "1.11.0",
+    "compression": "^1.4.1",
     "cookie-parser": "1.3.3",
     "ejs": "^2.2.4",
     "errorhandler": "^1.3.3",
@@ -31,9 +32,11 @@
   "devDependencies": {
     "autoprefixer": "^5.1.0",
     "browserify": "^8.1.3",
+    "clean-css": "^3.0.10",
     "node-inspector": "^0.8.3",
     "reactify": "^1.0.0",
     "stylus": "^0.50.0",
+    "uglify-js": "^2.4.16",
     "watch": "^0.14.0",
     "watchify": "^2.3.0"
   },
@@ -43,12 +46,15 @@
     "start": "node src/server.js",
     "debug-server": "node-debug --debug-brk=0 src/server.js",
     "build": "npm run build-js && npm run build-styles",
-    "build-js": "browserify src/frontend/scripts/main.jsx -t reactify -o public/bundle.js",
-    "build-styles": "npm run build-stylus && npm run autoprefixer",
+    "build-js": "NODE_ENV=production browserify src/frontend/scripts/main.jsx -t reactify -o public/bundle.js && npm run minify-js",
+    "build-styles": "npm run build-stylus && npm run autoprefixer && npm run minify-css",
+    "build-styles-dev": "npm run build-stylus && npm run autoprefixer",
     "build-stylus": "stylus --include-css -o public/bundle.css src/frontend/styles/main.styl",
-    "autoprefixer": "autoprefixer public/bundle.css",
     "watch": "npm run watch-js & npm run watch-styles",
     "watch-js": "watchify src/frontend/scripts/main.jsx -d -v -t reactify -o public/bundle.js",
-    "watch-styles": "watch 'npm run build-styles' src/frontend/styles/"
+    "watch-styles": "watch 'npm run build-styles-dev' src/frontend/styles/",
+    "autoprefixer": "autoprefixer public/bundle.css",
+    "minify-js": "uglifyjs public/bundle.js -o public/bundle.js",
+    "minify-css": "cleancss public/bundle.css -o public/bundle.css"
   }
 }

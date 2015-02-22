@@ -9,6 +9,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
+var compression = require('compression');
 var errorhandler = require('errorhandler');
 var log4js = require('log4js');
 var logger = log4js.getLogger(path.basename(__filename));
@@ -78,6 +79,10 @@ app.use(session({
     secret: process.env.SESSION_SECRET,
     saveUninitialized: true,
     resave: true
+}));
+app.use(compression({
+    // Compress everything over 10 bytes
+    threshold: 10
 }));
 
 
