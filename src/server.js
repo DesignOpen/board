@@ -11,8 +11,8 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var errorhandler = require('errorhandler');
 var log4js = require('log4js');
-
 var logger = log4js.getLogger(path.basename(__filename));
+
 if (process.env.NODE_ENV === 'production') {
     // Disable colors in production
     log4js.configure({
