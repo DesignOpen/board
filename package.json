@@ -2,6 +2,10 @@
   "name": "designopen-board",
   "version": "0.0.0",
   "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/DesignOpen/board.git"
+  },
   "main": "src/server.js",
   "author": "",
   "license": "GPLv3",
@@ -32,7 +36,7 @@
     "watchify": "^2.3.0"
   },
   "scripts": {
-    "postinstall": "NODE_ENV=development npm install && npm run build",
+    "postinstall": "npm run build",
     "tmux": "./tools/tmux.sh",
     "start": "node src/server.js",
     "debug-server": "node-debug --debug-brk=0 src/server.js",
