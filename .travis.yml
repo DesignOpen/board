@@ -1,8 +1,7 @@
 language: node_js
 node_js:
-  - 0.10
+  - 0.12
 before_script:
-  - cd backend && npm install
-  - cd frontend && npm install
+  - npm install
 script:
-  - cd backend && npm test
+  - npm test
