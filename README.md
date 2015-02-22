@@ -1,10 +1,49 @@
 # Design Open Board
 
-![Build status](https://travis-ci.org/DesignOpen/board.svg)
+[![Build Status](https://travis-ci.org/DesignOpen/board.svg)](https://travis-ci.org/DesignOpen/board)
 
 Job board which open source projects can use to find design contributors.
 
-## Infrastructure
+## Architecture
+
+### Dependencies explained
+
+**Server**
+
+* `express` Backend framework
+* `express-session` Express code module
+* `body-parser*` Express core module
+* `cookie-parser` Express core module
+* `errorhandler` Express error handler
+* `compression` Enables gzip compression for express
+* `ejs` Template language for express html files
+* `mongoose` Library for managing data in MongoDB
+* `node-jsx` Just-in-time JSX parses to require .jsx files in node
+* `passport` Authentication library
+* `log4js` Provides better logging than console.log
+
+**Client**
+
+* `bluebird` Best available promise library
+* `flux` Facebook's flux library which provides Dispatcher
+* `react` Core react library
+* `react-router` Router implemented with react
+
+Note that some of the client libraries are also used in server in initial render
+
+**Development**
+
+* `autoprefixer` CSS postprocessor which adds vendor prefixes
+* `browserify` Module loader to organize client-side code
+* `reactify` Browserify transform to support JSX syntax
+* `watchify` Faster version of browserify for local development
+* `clean-css` CSS minifier
+* `node-inspector` Node debugger. Used in npm run debug-server
+* `stylus` CSS preprocessor like SASS/LESS
+* `uglify-js` JS minifier
+* `watch` Watches changes in a directory and runs given command
+
+### Infrastructure
 
 All parts of the service are hosted in Heroku.
 There are two environments:
@@ -17,7 +56,7 @@ These environments are replicants of each other, they both have these addons:
 * MongoLab for database
 * Papertrail for centralized logging handling
 
-### Heroku details
+#### Heroku details
 
 * Heroku builds our web app after each deployment, we have build tools in devDependencies. That's why `NPM_CONFIG_PRODUCTION` is set to `false`. See https://devcenter.heroku.com/articles/nodejs-support
 
@@ -54,6 +93,8 @@ In project root:
 
 
 ## Development
+
+This project uses [npm scripts as task automation](http://substack.net/task_automation_with_npm_run).
 
 To start local server:
 
