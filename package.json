@@ -9,7 +9,9 @@
   "main": "src/server.js",
   "author": "",
   "license": "GPLv3",
-  "engine": "node 0.12.0",
+  "engines": {
+    "node": "0.12.0"
+  },
   "dependencies": {
     "bluebird": "^2.9.4",
     "body-parser": "1.11.0",
@@ -40,7 +42,7 @@
     "tmux": "./tools/tmux.sh",
     "start": "node src/server.js",
     "debug-server": "node-debug --debug-brk=0 src/server.js",
-    "build": "npm run build-js && npm run build-less",
+    "build": "npm run build-js && npm run build-styles",
     "build-js": "browserify src/frontend/scripts/main.jsx -t reactify -o public/bundle.js",
     "build-styles": "npm run build-stylus && npm run autoprefixer",
     "build-stylus": "stylus --include-css -o public/bundle.css src/frontend/styles/main.styl",

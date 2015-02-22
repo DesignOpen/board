@@ -17,6 +17,10 @@ These environments are replicants of each other, they both have these addons:
 * MongoLab for database
 * Papertrail for centralized logging handling
 
+### Heroku details
+
+* Heroku builds our web app after each deployment, we have build tools in devDependencies. That's why `NPM_CONFIG_PRODUCTION` is set to `false`. See https://devcenter.heroku.com/articles/nodejs-support
+
 ## Install development environment
 
 Guide to get the environment running in your local machine.
