@@ -1,17 +1,10 @@
 var express = require('express');
-require('node-jsx').install();
-var React = require('react');
-var ReactRouter = require('react-router');
-var path = require('path');
-var log4js = require('log4js');
-var logger = log4js.getLogger(path.basename(__filename));
 
 var postController = require('./controllers/post-controller');
 var userController = require('./controllers/user-controller');
 var categoryController = require('./controllers/category-controller');
-
 var config = require('./config');
-var routes = require('./frontend/scripts/routes.jsx');
+var runReactRoute = require('./reactRoutes.js');
 
 
 function initRoutes(app) {
@@ -37,31 +30,8 @@ function initRoutes(app) {
         index: false
     }));
 
-    app.use('*', function(req, res) {
-        ReactRouter.run(routes, req.originalUrl, function(Handler, state) {
-            logger.debug('Initially render', req.originalUrl);
-
-            // Each handler component must provide a static method for fetching
-            // data. The data must returned as plain JSON serializable objects
-            // state.routes contains array of matched routes. The last item
-            // is the innermost handler, see
-            // https://github.com/rackt/react-router/issues/813
-            var Component = state.routes[state.routes.length - 1].handler;
-            Component.fetchData(state).then(function(data) {
-                var handler = React.createElement(Handler, {
-                    params: state.params,
-                    query: state.query,
-                    data: data
-                });
-                var initialHtml = React.renderToString(handler);
-
-                res.render('index.html', {
-                    initialHtml: initialHtml,
-                    initialData: JSON.stringify(data)
-                });
-            });
-        });
-    });
+    // Everything else will be handled to react router
+    app.use('*', runReactRoute);
 }
 
 module.exports = {
