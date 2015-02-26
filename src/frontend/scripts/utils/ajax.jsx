@@ -31,5 +31,5 @@ function customRequest(/* args */) {
 }
 
 module.exports = {
-    request: customRequest
+    request: request
 };

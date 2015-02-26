@@ -12,6 +12,9 @@
   "engines": {
     "node": "0.12.0"
   },
+  "browser": {
+    "./src/services/post-service.js": "./src/frontend/scripts/services/post-service.jsx"
+  },
   "dependencies": {
     "bluebird": "^2.9.12",
     "body-parser": "1.11.0",
@@ -27,7 +30,8 @@
     "node-jsx": "^0.12.4",
     "passport": "^0.2.1",
     "react": "^0.12.2",
-    "react-router": "^0.12.0"
+    "react-router": "^0.12.0",
+    "superagent": "^0.21.0"
   },
   "devDependencies": {
     "autoprefixer": "^5.1.0",

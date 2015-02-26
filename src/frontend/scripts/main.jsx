@@ -1,9 +1,15 @@
 var React = require('react');
-var ReactRouter = require('react-router');
+var Router = require('react-router');
 
 var routes = require('./routes.jsx');
 
-var container = document.querySelector('#app')
-ReactRouter.run(routes, ReactRouter.HistoryLocation, function renderHandler(Handler, state) {
-    React.render(<Handler params={state.params} query={state.query} />, container);
+
+var container = document.querySelector('#app');
+var initialData = JSON.parse(document.querySelector('#initial-data').innerHTML);
+console.log(initialData)
+Router.run(routes, Router.HistoryLocation, function renderHandler(Handler, state) {
+    React.render(
+        <Handler params={state.params} query={state.query} data={initialData}/>,
+        container
+    );
 });

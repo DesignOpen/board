@@ -41,11 +41,10 @@ function initRoutes(app) {
         ReactRouter.run(routes, req.originalUrl, function(Handler, state) {
             logger.debug('Initially render', req.originalUrl);
 
-            // Here I would use component's static function to fetch data
-            // and then pass it as props to the component
-            // However this is not possible because of react router:
-            // https://github.com/rackt/react-router/issues/878
-            Handler.fetchData(state).then(function(data) {
+            // Each handler component must provide a static method for fetching
+            // data
+            var Component = state.routes[state.routes.length - 1].handler;
+            Component.fetchData(state).then(function(data) {
                 var handler = React.createElement(Handler, {
                     params: state.params,
                     query: state.query,
@@ -53,9 +52,11 @@ function initRoutes(app) {
                 });
                 var initialHtml = React.renderToString(handler);
 
-                res.render('index.html', {initialHtml: initialHtml});
+                res.render('index.html', {
+                    initialHtml: initialHtml,
+                    initialData: JSON.stringify(data)
+                });
             });
-
         });
     });
 }

@@ -11,7 +11,9 @@ function createPost(name) {
 }
 
 function getPosts() {
-    return Post.findAsync({});
+    return Post.findAsync({}).then(function(posts) {
+        return posts.map(function(p) { return p.toObject(); });
+    });
 }
 
 function getPostById(id) {

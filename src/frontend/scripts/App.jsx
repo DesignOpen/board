@@ -1,6 +1,6 @@
 var React = require('react');
-var ReactRouter = require('react-router');
-var RouteHandler = ReactRouter.RouteHandler;
+var Router = require('react-router');
+var RouteHandler = Router.RouteHandler;
 
 var MenuBar = require('./components/MenuBar.jsx');
 
