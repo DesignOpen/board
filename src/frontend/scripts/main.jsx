@@ -6,7 +6,6 @@ var routes = require('./routes.jsx');
 
 var container = document.querySelector('#app');
 var initialData = JSON.parse(document.querySelector('#initial-data').innerHTML);
-console.log(initialData)
 Router.run(routes, Router.HistoryLocation, function renderHandler(Handler, state) {
     React.render(
         <Handler params={state.params} query={state.query} data={initialData}/>,
