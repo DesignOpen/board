@@ -42,7 +42,10 @@ function initRoutes(app) {
             logger.debug('Initially render', req.originalUrl);
 
             // Each handler component must provide a static method for fetching
-            // data
+            // data. The data must returned as plain JSON serializable objects
+            // state.routes contains array of matched routes. The last item
+            // is the innermost handler, see
+            // https://github.com/rackt/react-router/issues/813
             var Component = state.routes[state.routes.length - 1].handler;
             Component.fetchData(state).then(function(data) {
                 var handler = React.createElement(Handler, {
