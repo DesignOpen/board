@@ -1,7 +1,8 @@
 var postController = require('./controllers/post-controller');
 var userController = require('./controllers/user-controller');
 var categoryController = require('./controllers/category-controller');
-var authController = require('./controllers/auth-controller');
+
+var userService = require('./services/user-service');
 
 var passport = require('passport');
 
@@ -26,9 +27,25 @@ function initRoutes(app) {
     app.delete('/api/categories/:id', categoryController.deleteCategoryById);
     app.put('/api/categories/:id', categoryController.putCategoryById);
 
-    // Route for GitHub auth
+    // Routes for GitHub authentication
     app.get('/auth/github', passport.authenticate('github'));
-    app.get('/auth/github/callback', authController.getGithubCallback);
+    app.get(
+        '/auth/github/callback', 
+        passport.authenticate('github', { failureRedirect: '/login' }),
+        function(req, res) {
+            // Try to add new user
+            userService.createUser("Unnamed User", req.user.id, req.user.username)
+            .catch(function(err){
+                // User already exists
+            });
+
+            res.redirect('/');
+        }
+    );
+    app.get('/whoami', function(req, res){
+        res.json(req.user);
+    });
+
 }
 
 module.exports = {

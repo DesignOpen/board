@@ -10,7 +10,9 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var passport = require('passport');
-var GitHubStrategy = require('passport-github').Strategy;
+var passportGithub = require('passport-github');
+var GitHubStrategy = passportGithub.Strategy;
+
 var errorhandler = require('errorhandler');
 var log4js = require('log4js');
 
@@ -46,6 +48,28 @@ fs.readdirSync(modelsPath).forEach(function (file) {
     }
 });
 
+// Use Github strategy with passport
+
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+passport.deserializeUser(function(obj, done) {
+  done(null, obj);
+});
+
+passport.use(new GitHubStrategy({
+        clientID: process.env.GITHUB_CLIENT_ID,
+        clientSecret: process.env.GITHUB_CLIENT_SECRET,
+        callbackURL: "http://127.0.0.1:"+(process.env.PORT || 80)+"/auth/github/callback"
+    },
+    function(accessToken, refreshToken, profile, done) {
+
+        process.nextTick(function () {
+            return done(null, profile);
+        });
+    }
+));
+
 var app = express();
 app.set('json spaces', 2);
 
@@ -74,33 +98,14 @@ app.use(session({
     resave: true
 }));
 
-// Use GitHubStrategy with passport
-passport.use(new GitHubStrategy({
-        clientID: process.env.GITHUB_CLIENT_ID,
-        clientSecret: process.env.GITHUB_CLIENT_SECRET,
-        callbackURL: "http://127.0.0.1:"+(process.env.PORT || 80)+"/auth/github/callback"
-    },
-    function(accessToken, refreshToken, profile, done) {
-        process.nextTick(function () {
-            // todo...
-        });
-    }
-));
-
+// Initialize passport
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Initialize routes. This must be done after models are registered
 // for mongoose
 var routes = require('./routes');
 routes.initRoutes(app);
-
-// Route for GitHub auth
-app.get('/auth/github/callback',
-    passport.authenticate('github', { failureRedirect: '/login' }),
-    function(req, res) {
-        res.redirect('/');
-    }
-);
-
 
 // Start server
 var port = process.env.PORT;
