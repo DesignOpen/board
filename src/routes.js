@@ -11,23 +11,24 @@ var userController = require('./controllers/user-controller');
 var categoryController = require('./controllers/category-controller');
 
 var config = require('./config');
+var viewData = require('./view-data');
 var routes = require('./frontend/scripts/routes.jsx');
 
 
 function initRoutes(app) {
     app.get('/api/posts', postController.getPosts);
-    app.get('/api/posts/:id', postController.getPostById);
     app.post('/api/posts', postController.postPost);
+    app.get('/api/posts/:id', postController.getPostById);
     app.delete('/api/posts/:id', postController.deletePostById);
     app.put('/api/posts/:id', postController.putPostById);
 
     app.get('/api/users', userController.getUsers);
-    app.get('/api/users/:id', userController.getUserById);
     app.post('/api/users', userController.postUser);
+    app.get('/api/users/:id', userController.getUserById);
 
     app.get('/api/categories', categoryController.getCategories);
-    app.get('/api/categories/:id', categoryController.getCategoryById);
     app.post('/api/categories', categoryController.postCategory);
+    app.get('/api/categories/:id', categoryController.getCategoryById);
     app.delete('/api/categories/:id', categoryController.deleteCategoryById);
     app.put('/api/categories/:id', categoryController.putCategoryById);
 
@@ -41,15 +42,19 @@ function initRoutes(app) {
         ReactRouter.run(routes, req.originalUrl, function(Handler, state) {
             logger.debug('Initially render', req.originalUrl);
 
-            // TODO: fetch data here and after that, render initial html
+            // View data module contains information how to fetch data
+            // for all routes
+            viewData.fetch(state).then(function(data) {
+                var handler = React.createElement(Handler, {
+                    params: state.params,
+                    query: state.query,
+                    data: data
+                });
+                var initialHtml = React.renderToString(handler);
 
-            var handler = React.createElement(Handler, {
-                params: state.params,
-                query: state.query
+                res.render('index.html', {initialHtml: initialHtml});
             });
-            var initialHtml = React.renderToString(handler);
 
-            res.render('index.html', {initialHtml: initialHtml});
         });
     });
 }
