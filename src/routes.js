@@ -11,7 +11,6 @@ var userController = require('./controllers/user-controller');
 var categoryController = require('./controllers/category-controller');
 
 var config = require('./config');
-var viewData = require('./view-data');
 var routes = require('./frontend/scripts/routes.jsx');
 
 
@@ -42,9 +41,11 @@ function initRoutes(app) {
         ReactRouter.run(routes, req.originalUrl, function(Handler, state) {
             logger.debug('Initially render', req.originalUrl);
 
-            // View data module contains information how to fetch data
-            // for all routes
-            viewData.fetch(state).then(function(data) {
+            // Here I would use component's static function to fetch data
+            // and then pass it as props to the component
+            // However this is not possible because of react router:
+            // https://github.com/rackt/react-router/issues/878
+            Handler.fetchData(state).then(function(data) {
                 var handler = React.createElement(Handler, {
                     params: state.params,
                     query: state.query,
