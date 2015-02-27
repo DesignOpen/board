@@ -1,8 +1,9 @@
 var React = require('react');
-var ReactRouter = require('react-router');
-var RouteHandler = ReactRouter.RouteHandler;
+var Router = require('react-router');
+var RouteHandler = Router.RouteHandler;
 
 var MenuBar = require('./components/MenuBar.jsx');
+
 
 var App = React.createClass({
     render: function render() {
@@ -10,7 +11,10 @@ var App = React.createClass({
         return (
             <div>
                 <MenuBar />
-                <RouteHandler params={this.props.params} query={this.props.query} />
+                <RouteHandler
+                    data={this.props.data}
+                    params={this.props.params}
+                    query={this.props.query} />
             </div>
         );
     }

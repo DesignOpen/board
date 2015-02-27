@@ -1,6 +1,4 @@
 # Sample configuration for environment variables in local development
-# You should have all environment variables set in backend/local-env.sh
-# to run the backend
 
 # For GitHub integration
 export GITHUB_CLIENT_ID=
