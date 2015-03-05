@@ -1,28 +1,32 @@
-var request = require('../utils/ajax.jsx').request;
+var ajax = require('../utils/ajax.jsx').ajax;
 
 
 function createPost(newPost) {
-    var req = request.post('/api/posts');
-    req.send(newPost);
-    return req.promise();
+    return ajax('/api/posts', {
+        method: 'post',
+        data: newPost
+    });
 }
 
 function getPosts() {
-    return request.get('/api/posts').promise();
+    return ajax('/api/posts');
 }
 
 function getPostById(id) {
-    return request.get('/api/posts/' + id).promise();
+    return ajax('/api/posts/' + id);
 }
 
-function deletePostById(id){
-    return request.delete('/api/posts/' + id).promise();
+function deletePostById(id) {
+    return ajax('/api/posts/' + id, {
+        method: 'delete'
+    });
 }
 
 function updatePostById(id, newPost) {
-    var req = request.put('/api/posts/' + id);
-    req.send(newPost);
-    return req.promise();
+    return ajax('/api/posts/' + id, {
+        method: 'put',
+        data: newPost
+    });
 }
 
 module.exports = {

@@ -20,32 +20,21 @@ var Index = React.createClass({
                 <h3>November</h3>
                 <Link to="project" params={{id: 0}}>Project 0</Link>
 
-                <a onClick={_.bind(this._refresh, this)}>Refresh</a>
+                <a onClick={_.bind(this._updateData, this)}>Refresh</a>
             </div>
         );
     },
 
-    componentDidMount: function componentDidMount() {
-        this._fetchData();
-    },
-
     _getPosts: function _getPosts() {
         var listItems = _.map(this.props.data, function(post) {
-            return <li>{post.name}</li>;
+            return <li key={post.id}>{post.name}</li>;
         });
 
         return <ul>{listItems}</ul>;
     },
 
-    _refresh: function _refresh() {
-        this._fetchData();
-    },
-
-    _fetchData: function _fetchData() {
-        Index.fetchData({
-            query: this.getQuery(),
-            params: this.getParams()
-        });
+    _updateData: function _updateData() {
+        this.props.fetchData();
     },
 
     statics: {

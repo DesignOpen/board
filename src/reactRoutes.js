@@ -25,18 +25,27 @@ function _handleRouteMatch(req, res, Handler, state) {
     // is the innermost handler, see
     // https://github.com/rackt/react-router/issues/813
     var Component = state.routes[state.routes.length - 1].handler;
-    Component.fetchData(state).then(function(data) {
-        var handler = React.createElement(Handler, {
-            params: state.params,
-            query: state.query,
-            data: data
-        });
-        var initialHtml = React.renderToString(handler);
 
-        res.render('index.html', {
-            initialHtml: initialHtml,
-            initialData: JSON.stringify(data)
+    if (Component.fetchData) {
+        Component.fetchData(state).then(function(data) {
+            _renderPage(req, res, Handler, state, data);
         });
+    } else {
+        _renderPage(req, res, Handler, state, null);
+    }
+}
+
+function _renderPage(req, res, Handler, state, data) {
+    var handler = React.createElement(Handler, {
+        params: state.params,
+        query: state.query,
+        data: data
+    });
+    var initialHtml = React.renderToString(handler);
+
+    res.render('index.html', {
+        initialHtml: initialHtml,
+        initialData: JSON.stringify(data)
     });
 }
 
