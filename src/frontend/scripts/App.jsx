@@ -2,7 +2,9 @@ var React = require('react');
 var Router = require('react-router');
 var RouteHandler = Router.RouteHandler;
 
-var MenuBar = require('./components/MenuBar.jsx');
+
+var Header = require('./components/Header.jsx');
+var Footer = require('./components/Footer.jsx');
 
 
 var App = React.createClass({
@@ -10,11 +12,12 @@ var App = React.createClass({
         // All elements which appear in all pages should be here
         return (
             <div>
-                <MenuBar />
+                <Header />
                 <RouteHandler
                     data={this.props.data}
                     params={this.props.params}
                     query={this.props.query} />
+                <Footer />
             </div>
         );
     }
