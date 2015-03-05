@@ -1,6 +1,5 @@
 var React = require('react');
 
-
 var Project = React.createClass({
     render: function render() {
         return (

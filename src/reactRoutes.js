@@ -9,7 +9,6 @@ var logger = log4js.getLogger(path.basename(__filename));
 
 var routes = require('./frontend/scripts/routes.jsx');
 
-
 function runReactRoute(req, res) {
     ReactRouter.run(routes, req.originalUrl, function(Handler, state) {
         _handleRouteMatch(req, res, Handler, state);

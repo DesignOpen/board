@@ -3,7 +3,6 @@ var Router = require('react-router');
 
 var routes = require('./routes.jsx');
 
-
 var container = document.querySelector('#app');
 var initialData = JSON.parse(document.querySelector('#initial-data').innerHTML);
 

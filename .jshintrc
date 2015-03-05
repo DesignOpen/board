@@ -40,8 +40,8 @@
   // Enforce use of single quotation marks for strings.
   "quotmark": "single",
 
-  // Enforce placing 'use strict' at the top function scope
-  "strict": true,
+  // Don't enforce placing 'use strict' at the top function scope
+  "strict": false,
 
   // Prohibit use of explicitly undeclared variables.
   "undef": true,

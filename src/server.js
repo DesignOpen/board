@@ -27,7 +27,7 @@ if (!process.env.MONGOLAB_URI) {
     logger.error('In local development, use command:');
     logger.error('\n    source local-env.sh\n');
     logger.error('before starting the server.');
-    process.exit(1);
+    throw new Error('Missing environment variables');
 }
 
 // Application configuration
@@ -43,7 +43,7 @@ mongoose.connection.on('error', function(err) {
 
 // Bootstrap models
 var modelsPath = path.join(__dirname, '/models');
-fs.readdirSync(modelsPath).forEach(function (file) {
+fs.readdirSync(modelsPath).forEach(function(file) {
     if (/(.*)\.(js$|coffee$)/.test(file)) {
         require(modelsPath + '/' + file);
     }
@@ -89,7 +89,6 @@ app.use(compression({
     // Compress everything over 10 bytes
     threshold: 10
 }));
-
 
 // Initialize routes. This must be done after models are registered
 // for mongoose

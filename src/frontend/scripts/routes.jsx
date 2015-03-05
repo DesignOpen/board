@@ -1,4 +1,3 @@
-var React = require('react');
 var Router = require('react-router');
 var Route = Router.Route;
 var DefaultRoute = Router.DefaultRoute;
@@ -8,7 +7,6 @@ var App = require('./App.jsx');
 var IndexPage = require('./pages/IndexPage.jsx');
 var PostPage = require('./pages/PostPage.jsx');
 var NotFoundPage = require('./pages/NotFoundPage.jsx');
-
 
 var routes = (
     <Route path="/" handler={App}>

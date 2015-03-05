@@ -1,7 +1,6 @@
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 
-
 function createUser(name, githubAccount) {
     var user = new User({
         name: name,
@@ -14,7 +13,6 @@ function createUser(name, githubAccount) {
 function getUsers() {
     return User.findAsync({});
 }
-
 
 module.exports = {
     createUser: createUser,

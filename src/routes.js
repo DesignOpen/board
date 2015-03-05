@@ -6,7 +6,6 @@ var categoryController = require('./controllers/category-controller');
 var config = require('./config');
 var runReactRoute = require('./reactRoutes.js');
 
-
 function initRoutes(app) {
     app.get('/api/posts', postController.getPosts);
     app.post('/api/posts', postController.postPost);

@@ -1,6 +1,5 @@
 var userService = require('../services/user-service');
 
-
 function getUsers(req, res, next) {
     userService.getUsers()
     .then(function(users) {
@@ -15,7 +14,7 @@ function getUserById(req, res, next) {
 
 function postUser(req, res, next) {
     userService.createUser(req.body.name, req.body.githubAccount)
-    .then(function(user){
+    .then(function(user) {
         req.json(user);
     })
     .catch(next);
@@ -24,5 +23,5 @@ function postUser(req, res, next) {
 module.exports = {
     getUsers: getUsers,
     getUserById: getUserById,
-    postUser: postUser,
+    postUser: postUser
 };

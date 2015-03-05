@@ -4,7 +4,6 @@ var RouteHandler = Router.RouteHandler;
 
 var MenuBar = require('./components/MenuBar.jsx');
 
-
 var App = React.createClass({
     getInitialState: function getInitialState() {
         return {
@@ -33,7 +32,7 @@ var App = React.createClass({
 
         return this.props.PageComponent.fetchData.apply(this, arguments)
         .then(function(data) {
-            console.log('Fetched new data', data)
+            console.log('Fetched new data', data);
             self.setState({
                 pageData: data
             });

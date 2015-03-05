@@ -6,11 +6,10 @@ var Promise = require('bluebird');
 var request = require('superagent');
 var Request = request.Request;
 
-
 // Wrap superagent promise to bluebird
 Request.prototype.promise = function() {
     var self = this;
-    return new Promise(function(resolve, reject){
+    return new Promise(function(resolve, reject) {
         Request.prototype.end.call(self, function(err, res) {
             if (res && res.status >= 400) {
                 var customErr = new Error(res.body);

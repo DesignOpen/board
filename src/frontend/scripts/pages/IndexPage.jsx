@@ -4,9 +4,7 @@ var Router = require('react-router');
 var Link = Router.Link;
 var State = Router.State;
 
-
 var postService = require('../../../services/post-service');
-
 
 var Index = React.createClass({
     mixins: [State],

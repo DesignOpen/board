@@ -1,6 +1,5 @@
 var postService = require('../services/post-service');
 
-
 function getPosts(req, res, next) {
     postService.getPosts()
     .then(function(posts) {

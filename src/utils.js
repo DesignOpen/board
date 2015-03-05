@@ -1,7 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-
 // Helper to create schema which automatically provides created and modified
 // timestamps
 function createSchema(opts) {
@@ -22,7 +21,6 @@ function createSchema(opts) {
 
     return schema;
 }
-
 
 module.exports = {
     createSchema: createSchema

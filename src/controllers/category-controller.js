@@ -46,4 +46,4 @@ module.exports = {
     postCategory: postCategory,
     deleteCategoryById: deleteCategoryById,
     putCategoryById: putCategoryById
-}
+};
