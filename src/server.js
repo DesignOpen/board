@@ -35,6 +35,11 @@ var config = require('./config');
 
 // Connect to database
 mongoose.connect(process.env.MONGOLAB_URI, config.mongoOptions);
+mongoose.connection.on('error', function(err) {
+    logger.error('Error with MongoDB connection!');
+    logger.error(err + '\n');
+    throw err;
+});
 
 // Bootstrap models
 var modelsPath = path.join(__dirname, '/models');
