@@ -15,5 +15,3 @@ export SESSION_SECRET=
 
 export PS1="[board] $PS1"
 echo "Environment variables set!"
-echo "Now run:"
-echo "\n    npm start\n"

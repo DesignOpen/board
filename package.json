@@ -49,7 +49,7 @@
     "test": "echo 'No tests'",
     "postinstall": "npm run build",
     "tmux": "./tools/tmux.sh",
-    "start": "node src/server.js",
+    "start": "source local-env.sh && node src/server.js",
     "debug-server": "node-debug --debug-brk=0 src/server.js",
     "build": "npm run build-js && npm run build-styles",
     "build-js": "NODE_ENV=production browserify src/frontend/scripts/main.jsx -t reactify -o public/bundle.js && npm run minify-js",
