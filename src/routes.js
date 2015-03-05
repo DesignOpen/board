@@ -34,7 +34,7 @@ function initRoutes(app) {
         passport.authenticate('github', { failureRedirect: '/login' }),
         function(req, res) {
             // Try to add new user
-            userService.createUser("Unnamed User", req.user.id, req.user.username)
+            userService.createUser('Unnamed User', 'user', req.user.id, req.user.username)
             .catch(function(err){
                 // User already exists
             });
@@ -44,6 +44,10 @@ function initRoutes(app) {
     );
     app.get('/whoami', function(req, res){
         res.json(req.user);
+    });
+    app.get('/logout', function(req, res){
+        req.logout();
+        res.redirect('/');
     });
 
 }

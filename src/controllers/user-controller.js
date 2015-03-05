@@ -17,9 +17,6 @@ function getUserById(req, res, next) {
     .catch(next);
 }
 
-
-
-
 function postUser(req, res, next) {
     userService.createUser(req.body.name, req.body.githubAccount)
     .then(function(user){

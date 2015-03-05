@@ -3,6 +3,7 @@ var utils = require('../utils');
 
 var schema = utils.createSchema({
     name: String,
+    role: String,
     githubId: {type: Number, unique: true},
     githubUsername: {type: String, unique: true}
 });
