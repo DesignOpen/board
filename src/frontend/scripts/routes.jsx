@@ -11,7 +11,7 @@ var NotFoundPage = require('./pages/NotFoundPage.jsx');
 
 var routes = (
     <Route path="/" handler={App}>
-        <Route name="project" path="project/:id" handler={PostPage} />
+        <Route name="post" path="post/:id" handler={PostPage} />
         <DefaultRoute name="index" handler={IndexPage} />
         <NotFoundRoute handler={NotFoundPage} />
     </Route>
