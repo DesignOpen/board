@@ -2,13 +2,12 @@ var _ = require('lodash');
 var React = require('react');
 var Router = require('react-router');
 var Link = Router.Link;
-var StateMixin = Router.State;
 
 var UtilMixin = require('../mixins/UtilMixin.jsx');
 var postService = require('../../../services/post-service');
 
 var Index = React.createClass({
-    mixins: [StateMixin, UtilMixin],
+    mixins: [Router.State, UtilMixin],
 
     render: function render() {
         return (
