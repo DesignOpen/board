@@ -3,6 +3,15 @@ var path = require('path');
 
 var Promise = require('bluebird');
 var mongoose = require('mongoose');
+// Set lean option by default on
+// http://mongoosejs.com/docs/api.html#query_Query-lean
+// Doing this allows us to write simpler service methods.
+// Otherwise each query should be called with lean option or results should be
+// serialized with mongoose's .toObject() call.
+// This also adds id field to returned objects, see
+// https://github.com/goodeggs/mongoose-lean
+var patchMongoose = require('mongoose-lean');
+patchMongoose(mongoose);
 Promise.promisifyAll(mongoose);
 
 var express = require('express');
@@ -62,10 +71,7 @@ if (process.env.NODE_ENV !== 'production') {
 
     // Add request logging
     app.use(log4js.connectLogger(logger));
-}
 
-var nodeEnv = process.env.NODE_ENV;
-if (nodeEnv === 'development') {
     // Disable caching for easier testing
     app.use(function noCache(req, res, next) {
         res.header('Cache-Control', 'no-cache, no-store, must-revalidate');
@@ -75,6 +81,17 @@ if (nodeEnv === 'development') {
     });
 
     app.use(errorhandler());
+
+    // Emulate latency in local development
+    if (config.apiLatency !== null) {
+        app.use(function(req, res, next) {
+            if (req.path.indexOf('/api') !== -1) {
+                setTimeout(next, config.apiLatency);
+            } else {
+                next();
+            }
+        });
+    }
 }
 
 app.use(bodyParser.urlencoded({extended: true}));
@@ -112,6 +129,7 @@ process.on('SIGTERM', function() {
     server.close(function() {
         logger.info('Close mongodb connection');
         mongoose.disconnect();
+        process.exit(0);
     });
 });
 

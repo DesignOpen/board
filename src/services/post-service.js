@@ -10,21 +10,19 @@ function createPost(name) {
 }
 
 function getPosts() {
-    return Post.findAsync({}).then(function(posts) {
-        return posts.map(function(p) { return p.toObject(); });
-    });
+    return Post.findAsync({});
 }
 
 function getPostById(id) {
-    return Post.findOneAsync({_id: id});
+    return Post.findByIdAsync(id);
 }
 
 function deletePostById(id) {
-    return Post.removeAsync({_id: id});
+    return Post.findByIdAndRemoveAsync(id);
 }
 
 function updatePostById(id, name) {
-    return Post.findOneAndUpdateAsync({_id: id}, {name: name});
+    return Post.findByIdAndUpdateAsync(id, {name: name});
 }
 
 module.exports = {
