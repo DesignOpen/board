@@ -1,7 +1,7 @@
 var React = require('react');
 
 var Header = React.createClass({
-    render: function(){
+    render: function render() {
         return (
             <div className="header">
                 <div className="logo"><h1>
