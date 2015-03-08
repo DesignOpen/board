@@ -4,6 +4,10 @@ JavaScript style is enforced with ESLint and JSCS.
 
 ## React
 
+State changes in async callback functions should always use `setStateSafe` method
+defined in **UtilMixin**. It will guard from setting state for unmounted components.
+See https://github.com/facebook/react/issues/2787
+
 ### Component methods
 
 Internal react methods are defined first, component's custom methods last.
