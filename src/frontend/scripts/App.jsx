@@ -18,7 +18,7 @@ var App = React.createClass({
 
     componentWillReceiveProps: function componentWillReceiveProps() {
         // Route changed and app received new params and query
-        // We must data from previous page
+        // We must clear data from previous page
         this.setState({
             pageData: null
         });
@@ -44,6 +44,7 @@ var App = React.createClass({
     // control over all data fetches.
     // This allows us to save data state only in App level.
     // All components below get their data as props
+    // Note: individual components may still save UI state
     _fetchData: function _fetchData() {
         var self = this;
 

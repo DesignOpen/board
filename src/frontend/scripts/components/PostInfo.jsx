@@ -1,15 +1,6 @@
 var React = require('react');
 
 var PostInfo = React.createClass({
-    getDefaultProps: function getDefaultProps() {
-        return {
-            post: {
-                name: '',
-                createdAt: ''
-            }
-        };
-    },
-
     render: function render() {
         var post = this.props.post;
 

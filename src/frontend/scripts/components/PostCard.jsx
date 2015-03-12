@@ -2,18 +2,16 @@ var React = require('react');
 var Router = require('react-router');
 var Link = Router.Link;
 
-var PostCard = React.createClass({
-    getDefaultProps: function getDefaultProps() {
-        return {
-            post: {
-                name: '',
-                createdAt: ''
-            }
-        };
-    },
+var dateUtil = require('../utils/date-util.jsx');
 
+var DATE_FORMAT = 'MMM D';
+
+var PostCard = React.createClass({
     render: function render() {
         var post = this.props.post;
+        var formattedCreatedAt = post.createdAt
+            ? post.createdAt.format(DATE_FORMAT)
+            : '';
 
         return (
             <article className="post-card">
@@ -21,7 +19,7 @@ var PostCard = React.createClass({
                     <h2>{post.name}</h2>
                 </Link>
 
-                <h4>{post.createdAt}</h4>
+                <h4>{formattedCreatedAt}</h4>
             </article>
         );
     }

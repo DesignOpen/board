@@ -7,26 +7,16 @@ var PostInfo = require('../components/PostInfo.jsx');
 var UtilMixin = require('../mixins/UtilMixin.jsx');
 var Loader = require('../components/Loader.jsx');
 var postService = require('../../../services/post-service');
-
-var NON_BREAKING_SPACE = '\u00A0';
+var transform = require('../api/post-transform.jsx');
 
 var Project = React.createClass({
     mixins: [Router.State, UtilMixin],
 
     render: function render() {
-        var post = _.merge({
-            name: NON_BREAKING_SPACE,
-            id: NON_BREAKING_SPACE
-        }, this.props.data);
-
         return (
             <div className="page">
                 {this.getLoaderElement()}
-
-                <PostCard post={post} />
-                <PostInfo post={post} />
-
-                <p>{post.content}</p>
+                {this._getPageContent(this.props)}
             </div>
         );
     },
@@ -39,6 +29,21 @@ var Project = React.createClass({
 
     componentDidMount: function componentDidMount() {
         this.updateData();
+    },
+
+    _getPageContent: function _getPageContent(props) {
+        if (!props.data) return null;
+
+        var post = transform.transformPost(this.props.data);
+
+        return (
+            <div className="page-content">
+                <PostCard post={post} />
+                <PostInfo post={post} />
+
+                <p>{post.content}</p>
+            </div>
+        );
     }
 });
 

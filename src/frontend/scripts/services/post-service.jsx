@@ -1,4 +1,4 @@
-var ajax = require('../utils/ajax.jsx').ajax;
+var ajax = require('../utils/ajax-util.jsx').ajax;
 
 function createPost(newPost) {
     return ajax('/api/posts', {
