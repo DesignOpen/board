@@ -23,25 +23,6 @@ var NewPostPage = React.createClass({
         );
     },
 
-    statics: {
-        willTransitionFrom: function willTransitionFrom(transition, component) {
-            // Check if user has written something to input fields
-            var inputData = component._gatherInputData();
-            var somethingWritten = _.any(_.map(inputData, function(value, key) {
-                return Boolean(value);
-            }));
-
-            if (somethingWritten) {
-                var msg = 'You have unsaved information, are you sure you';
-                msg += ' want to leave this page?';
-
-                if (!window.confirm(msg)) {
-                    transition.abort();
-                }
-            }
-        }
-    },
-
     _gatherInputData: function _gatherInputData() {
         return {
             name: this.refs.name.getDOMNode().value,
