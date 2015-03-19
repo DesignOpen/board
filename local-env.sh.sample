@@ -1,0 +1,17 @@
+# Sample configuration for environment variables in local development
+
+# For GitHub integration
+export GITHUB_CLIENT_ID=
+export GITHUB_CLIENT_SECRET=
+
+# Defines which port backend runs on
+export PORT=9000
+
+# Just use MONGOLAB_URI name for local development too
+export MONGOLAB_URI=mongodb://localhost:27017/designopen_board
+
+# Long secret key for sessions, for local dev, just input random ascii secret
+export SESSION_SECRET=
+
+export PS1="[board] $PS1"
+echo "Environment variables set!"

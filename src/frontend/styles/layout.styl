@@ -1,0 +1,47 @@
+/*
+Rules related to page layout. These rules
+define where for example page content, header and footer are.
+*/
+
+.app > *
+  display flex
+  min-height 100%;
+  flex-direction column;
+
+.page
+  flex 1
+  padding 0 40px 0 20px
+
+header, footer
+  flex none
+
+footer
+  border-width 1px 0 0
+  width 100%
+
+header
+  border-width 0 0 1px
+
+header .box, footer .box
+  margin 0 auto
+  width 240px
+
+@media all and (min-width: 800px)
+  header
+    position absolute
+    right 0
+    border-width 0 0 0 1px
+    height 100%
+    padding 0 15px
+    width 270px
+
+  footer
+    position absolute
+    right 0
+    bottom 0
+    border-width 0
+    padding 20px 15px
+    width 270px
+
+  .page
+    margin-right 270px

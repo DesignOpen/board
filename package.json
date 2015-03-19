@@ -1,0 +1,78 @@
+{
+  "name": "designopen-board",
+  "version": "0.0.0",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/DesignOpen/board.git"
+  },
+  "main": "src/server.js",
+  "author": "",
+  "license": "GPLv3",
+  "engines": {
+    "node": "0.12.0"
+  },
+  "browser": {
+    "./src/services/post-service.js": "./src/frontend/scripts/services/post-service.jsx"
+  },
+  "dependencies": {
+    "bluebird": "^2.9.12",
+    "body-parser": "1.11.0",
+    "compression": "^1.4.1",
+    "cookie-parser": "1.3.3",
+    "ejs": "^2.2.4",
+    "errorhandler": "^1.3.3",
+    "express": "4.11.2",
+    "express-session": "1.10.2",
+    "flux": "^2.0.1",
+    "lodash": "^3.3.1",
+    "log4js": "^0.6.22",
+    "moment": "^2.9.0",
+    "mongoose": "3.8.22",
+    "mongoose-lean": "^1.0.0",
+    "node-jsx": "^0.12.4",
+    "passport": "^0.2.1",
+    "react": "^0.12.2",
+    "react-router": "^0.12.0",
+    "superagent": "^0.21.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^5.1.0",
+    "browserify": "^8.1.3",
+    "clean-css": "^3.1.5",
+    "eslint": "^0.15.1",
+    "esprima-fb": "~13001.1.0-dev-harmony-fb",
+    "jscs": "jscs-dev/node-jscs#master",
+    "jsxhint": "STRML/JSXHint#master",
+    "node-inspector": "^0.8.3",
+    "nodemon": "^1.3.7",
+    "reactify": "^1.0.0",
+    "stylus": "^0.50.0",
+    "uglify-js": "^2.4.16",
+    "watch": "^0.14.0",
+    "watchify": "^2.3.0"
+  },
+  "scripts": {
+    "test": "npm run lint-js",
+    "postinstall": "npm run build",
+    "tmux": "./tools/tmux.sh",
+    "start": "source ./local-env.sh && nodemon --watch ./src -e js,jsx src/server.js",
+    "start-production": "node src/server.js",
+    "debug-server": "source ./local-env.sh && node-debug --debug-brk=0 src/server.js",
+    "build": "npm run build-js && npm run build-styles",
+    "build-js": "NODE_ENV=production browserify src/frontend/scripts/main.jsx -t reactify -o public/bundle.js && npm run minify-js",
+    "build-styles": "npm run build-stylus && npm run autoprefixer && npm run minify-css",
+    "build-styles-dev": "npm run build-stylus && npm run autoprefixer",
+    "build-stylus": "stylus --include-css -o public/bundle.css src/frontend/styles/main.styl",
+    "watch": "npm run watch-js & npm run watch-styles",
+    "watch-js": "watchify src/frontend/scripts/main.jsx -d -v -t reactify -o public/bundle.js",
+    "watch-styles": "watch 'npm run build-styles-dev' src/frontend/styles/",
+    "autoprefixer": "autoprefixer public/bundle.css",
+    "minify-js": "uglifyjs public/bundle.js -o public/bundle.js",
+    "minify-css": "cleancss --skip-aggressive-merging --skip-restructuring public/bundle.css -o public/bundle.css",
+    "lint-js": "npm run jscs && npm run jsxhint && npm run eslint",
+    "jscs": "jscs --esprima=esprima-fb ./src",
+    "jsxhint": "jsxhint './src/**/*'",
+    "eslint": "eslint --ext .js,.jsx ./src"
+  }
+}
