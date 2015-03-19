@@ -9,7 +9,7 @@ function createSchema(opts) {
 
     var schema = new Schema(opts);
 
-    schema.pre('save', function(next) {
+    schema.pre('save', function preSave(next) {
         var now = new Date();
         this.updatedAt = now;
         if (!this.createdAt) {
@@ -17,6 +17,16 @@ function createSchema(opts) {
         }
 
         next();
+    });
+
+    // Duplicate the ID field.
+    schema.virtual('id').get(function getId() {
+        return this._id.toHexString();
+    });
+
+    // Ensure virtual fields are serialised.
+    schema.set('toJSON', {
+        virtuals: true
     });
 
     return schema;

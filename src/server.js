@@ -15,11 +15,11 @@ patchMongoose(mongoose);
 Promise.promisifyAll(mongoose);
 
 var express = require('express');
+var errorhandler = require('errorhandler');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var compression = require('compression');
-var errorhandler = require('errorhandler');
 var log4js = require('log4js');
 var logger = log4js.getLogger(path.basename(__filename));
 
@@ -80,8 +80,6 @@ if (process.env.NODE_ENV !== 'production') {
         next();
     });
 
-    app.use(errorhandler());
-
     // Emulate latency in local development
     if (config.apiLatency !== null) {
         app.use(function(req, res, next) {
@@ -111,6 +109,9 @@ app.use(compression({
 // for mongoose
 var routes = require('./routes');
 routes.initRoutes(app);
+
+// Handle errors
+app.use(errorhandler());
 
 // Start server
 var port = process.env.PORT;

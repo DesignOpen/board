@@ -1,17 +1,19 @@
 var dispatcher = require('../dispatcher.jsx');
-
-var ACTIONS = Object.freeze({
-    CREATE_POST: 0
-});
+var postService = require('../services/post-service.jsx');
+var actions = require('../constants.jsx').actions;
 
 function createPost(post) {
-    dispatcher.dispatch({
-        type: ACTIONS.CREATE_MESSAGE,
-        post: post
+    return postService.createPost(post)
+    .then(function(post) {
+        dispatcher.dispatch({
+            type: actions.CREATE_POST,
+            data: post
+        });
+
+        return post;
     });
 }
 
 module.exports = {
-    createPost: createPost,
-    ACTIONS: ACTIONS
+    createPost: createPost
 };

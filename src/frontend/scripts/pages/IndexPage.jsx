@@ -34,7 +34,7 @@ var Index = React.createClass({
     _getPageContent: function _getPageContent(props) {
         if (!props.data) return null;
 
-        var posts = _.map(this.props.data, transform.transformPost);
+        var posts = _.map(props.data, transform.transformPost);
 
         return (
             <div className="page-content">

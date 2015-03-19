@@ -1,10 +1,8 @@
 var mongoose = require('mongoose');
 var Post = mongoose.model('Post');
 
-function createPost(name) {
-    var post = new Post({
-        name: name
-    });
+function createPost(postJson) {
+    var post = new Post(postJson);
 
     return post.saveAsync();
 }

@@ -4,6 +4,9 @@ function createPost(newPost) {
     return ajax('/api/posts', {
         method: 'post',
         data: newPost
+    })
+    .then(function(response) {
+        return response[0];
     });
 }
 

@@ -21,16 +21,28 @@ var UtilMixin = {
         this.setState(state, cb);
     },
 
-    isLoading: function isLoading() {
+    isLoaderVisible: function isLoaderVisible() {
         return this.state.showLoader;
     },
 
     showLoader: function showLoader() {
+        this.setState({showLoader: true});
+    },
+
+    showLoaderSafe: function showLoaderSafe() {
         this.setStateSafe({showLoader: true});
     },
 
     hideLoader: function hideLoader() {
+        this.setState({showLoader: true});
+    },
+
+    hideLoaderSafe: function hideLoaderSafe() {
         this.setStateSafe({showLoader: false});
+    },
+
+    showMessage: function showMessage(level, title, message) {
+        window.alert(title + '\n' + message);
     },
 
     // Return generic loader element displayed in page corner
@@ -60,7 +72,7 @@ var UtilMixin = {
 
         if (opts.showLoader) {
             this.showLoader();
-            fetchPromise.finally(this.hideLoader);
+            fetchPromise.finally(this.hideLoaderSafe);
         }
     }
 };

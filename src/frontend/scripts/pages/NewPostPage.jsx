@@ -1,24 +1,48 @@
 var _ = require('lodash');
 var React = require('react');
+var Router = require('react-router');
 var postActionCreator = require('../actions/post-action-creator.jsx');
+var UtilMixin = require('../mixins/UtilMixin.jsx');
 
 var NewPostPage = React.createClass({
+    mixins: [UtilMixin, Router.Navigation],
 
     render: function render() {
+        return (
+            <div className="page">
+                {this.getLoaderElement()}
+                {this._getPageContent(this.props)}
+            </div>
+        );
+    },
+
+    _getPageContent: function _getPageContent() {
         return (
             <div className="page new-post-page">
                 <h1>New post</h1>
 
                 <label htmlFor="name-input">Name</label>
-                <input id="name-input" placeholder="Name" type="text" ref="name" />
+                <input
+                    id="name-input"
+                    placeholder="Name"
+                    type="text"
+                    ref="name" />
 
                 <label htmlFor="description-input">Description</label>
-                <input id="description-input" placeholder="Description" type="text" ref="description" />
+                <input
+                    id="description-input"
+                    placeholder="Description"
+                    type="text"
+                    ref="description" />
 
                 <label htmlFor="content-input">Content</label>
                 <textarea id="content-input" ref="content" />
 
-                <button onClick={this._onSubmit}>Create</button>
+                <button
+                    disabled={this.isLoaderVisible()}
+                    onClick={this._onSubmit}>
+                    Create
+                </button>
             </div>
         );
     },
@@ -32,8 +56,19 @@ var NewPostPage = React.createClass({
     },
 
     _onSubmit: function _onSubmit() {
-        var post = this._gatherInputData();
-        postActionCreator.createPost(post);
+        var newPost = this._gatherInputData();
+
+        this.showLoader();
+        var self = this;
+        postActionCreator.createPost(newPost)
+        .then(function(post) {
+            self.transitionTo('post', {id: post.id});
+        })
+        .catch(function(err) {
+            var message = err.body.error.message;
+            self.showMessage('error', 'Error saving post:', message);
+        })
+        .finally(this.hideLoaderSafe);
     }
 });
 

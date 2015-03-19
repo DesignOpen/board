@@ -17,7 +17,7 @@ function getPostById(req, res, next) {
 }
 
 function postPost(req, res, next) {
-    postService.createPost(req.body.name)
+    postService.createPost(req.body)
     .then(function(post) {
         res.json(post);
     })

@@ -12,8 +12,9 @@ Request.prototype.promise = function() {
     return new Promise(function(resolve, reject) {
         Request.prototype.end.call(self, function(err, res) {
             if (res && res.status >= 400) {
-                var customErr = new Error(res.body);
+                var customErr = new Error(res.body.error.message);
                 customErr.res = res;
+                customErr.body = res.body;
                 reject(customErr);
             } else if (err) {
                 reject(err);

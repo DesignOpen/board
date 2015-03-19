@@ -34,7 +34,7 @@ var Project = React.createClass({
     _getPageContent: function _getPageContent(props) {
         if (!props.data) return null;
 
-        var post = transform.transformPost(this.props.data);
+        var post = transform.transformPost(props.data);
 
         return (
             <div className="page-content">
