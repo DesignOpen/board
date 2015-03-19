@@ -19,7 +19,7 @@ var PostCard = React.createClass({
                     <h2>{post.name}</h2>
                 </Link>
 
-                <h4>{formattedCreatedAt}</h4>
+                <h4 className="date">{formattedCreatedAt}</h4>
             </article>
         );
     }
