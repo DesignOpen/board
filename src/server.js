@@ -19,6 +19,7 @@ var errorhandler = require('errorhandler');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
 var compression = require('compression');
 var passport = require('passport');
 var passportGithub = require('passport-github');
@@ -63,16 +64,21 @@ fs.readdirSync(modelsPath).forEach(function(file) {
     }
 });
 
-// Use Github strategy with passport
-
+// Save only user's github id to the session
 passport.serializeUser(function(user, done) {
-    logger.debug('serializeUser', user, done);
-    done(null, user);
+    done(null, user.id);
 });
 
-passport.deserializeUser(function(user, done) {
-    logger.debug('deserializeUser', user, done);
-    done(null, user);
+var userService = require('./services/user-service');
+passport.deserializeUser(function(id, done) {
+    userService.getUserByGithubId(id)
+    .then(function(user) {
+        logger.debug('deserializeUser, found user', user);
+        done(null, user);
+    })
+    .catch(function(err) {
+        done(err);
+    });
 });
 
 passport.use(new GitHubStrategy({
@@ -126,7 +132,10 @@ app.use(cookieParser());
 app.use(session({
     secret: process.env.SESSION_SECRET,
     saveUninitialized: true,
-    resave: true
+    resave: true,
+    store: new MongoStore({
+         mongooseConnection: mongoose.connection
+    })
 }));
 app.use(compression({
     // Compress everything over 10 bytes

@@ -13,10 +13,20 @@ var PostList = React.createClass({
     render: function render() {
         return (
             <div className="post-list">
-                <ul>
-                    {this._getPostCards()}
-                </ul>
+                {this._getContent()}
             </div>
+        );
+    },
+
+    _getContent: function _getContent() {
+        if (_.isEmpty(this.props.posts)) {
+            return <p>No posts</p>;
+        }
+
+        return (
+            <ul>
+                {this._getPostCards()}
+            </ul>
         );
     },
 

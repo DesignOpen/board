@@ -12,7 +12,8 @@ var App = React.createClass({
     getInitialState: function getInitialState() {
         return {
             // This data object contains all data that a single page needs
-            pageData: this.props.data
+            pageData: this.props.data,
+            user: this.props.user
         };
     },
 
@@ -31,6 +32,7 @@ var App = React.createClass({
                 <Header />
                 <RouteHandler
                     data={this.state.pageData}
+                    user={this.state.user}
                     params={this.props.params}
                     query={this.props.query}
                     fetchData={this._fetchData} />

@@ -16,7 +16,8 @@ Router.run(routes, Router.HistoryLocation, function renderHandler(Handler, state
             PageComponent={Component}
             params={state.params}
             query={state.query}
-            data={initialData}/>,
+            data={initialData.data}
+            user={initialData.user} />,
         container
     );
 });

@@ -1,14 +1,8 @@
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 
-function createUser(name, role, githubId, githubUsername) {
-    var user = new User({
-        name: name,
-        role: role,
-        githubId: githubId,
-        githubUsername: githubUsername
-    });
-
+function createUser(user) {
+    var user = new User(user);
     return user.saveAsync();
 }
 

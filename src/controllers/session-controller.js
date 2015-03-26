@@ -21,7 +21,13 @@ function githubCallback(req, res) {
     .then(function(user) {
         if (user === null) {
             logger.debug('User does not exist, creating');
-            return userService.createUser('Unnamed User', 'user', req.user.id, req.user.username);
+
+            return userService.createUser({
+                name: user.name,
+                role: 'normal',
+                githubId: req.user.id,
+                githubUsername: req.user.username
+            });
         }
 
         logger.debug('User exists', user);

@@ -14,7 +14,7 @@ var routes = (
     <Route path="/" handler={App}>
         <Route name="post" path="post/:id/?" handler={PostPage} />
         <Route name="new-post" path="new-post/?" handler={NewPostPage} />
-        <DefaultRoute name="index/?" handler={IndexPage} />
+        <DefaultRoute name="index" handler={IndexPage} />
         <NotFoundRoute handler={NotFoundPage} />
     </Route>
 );

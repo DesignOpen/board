@@ -41,16 +41,22 @@ function _handleRouteMatch(req, res, Handler, state) {
 }
 
 function _renderPage(req, res, Handler, state, data) {
+    var initialData = {
+        data: data,
+        user: req.user
+    };
+
     var handler = React.createElement(Handler, {
         params: state.params,
         query: state.query,
-        data: data
+        data: initialData.data,
+        user: initialData.user
     });
-    var initialHtml = React.renderToString(handler);
 
+    var initialHtml = React.renderToString(handler);
     res.render('index.html', {
         initialHtml: initialHtml,
-        initialData: JSON.stringify(data)
+        initialData: JSON.stringify(initialData)
     });
 }
 

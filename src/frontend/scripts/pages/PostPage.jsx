@@ -24,7 +24,7 @@ var Project = React.createClass({
 
     statics: {
         fetchData: function fetchData(routeState) {
-            return postService.getPostById(routeState.params.id);
+            return postService.getPostById(routeState.params.id)
         }
     },
 
@@ -33,7 +33,9 @@ var Project = React.createClass({
     },
 
     _getPageContent: function _getPageContent(props) {
-        if (!props.data) return null;
+        if (_.isEmpty(props.data)) {
+            return null;
+        }
 
         var post = transform.transformPost(props.data);
 
