@@ -5,7 +5,7 @@ var PostInfo = React.createClass({
         var post = this.props.post;
 
         return (
-            <ul>
+            <ul className="post-info">
                 <li>
                     <h3>Description</h3>
                     <p>{post.description}</p>

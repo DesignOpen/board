@@ -4,6 +4,7 @@ var Router = require('react-router');
 
 var PostCard = require('../components/PostCard.jsx');
 var PostInfo = require('../components/PostInfo.jsx');
+var PostContent = require('../components/PostContent.jsx');
 var UtilMixin = require('../mixins/UtilMixin.jsx');
 var Loader = require('../components/Loader.jsx');
 var postService = require('../../../services/post-service');
@@ -39,9 +40,10 @@ var Project = React.createClass({
         return (
             <div className="page-content">
                 <PostCard post={post} />
-                <PostInfo post={post} />
-
-                <p>{post.content}</p>
+                <div className="post-details">
+                    <PostInfo post={post} />
+                    <PostContent post={post} />
+                </div>
             </div>
         );
     }
