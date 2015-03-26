@@ -17,16 +17,19 @@ function githubCallback(req, res) {
     logger.debug('GitHub callback called');
     // Create a new user to our database if we don't have a record of the
     // github user
-    userService.getUserByGithubId(req.user.id)
+    var githubUser = req.user;
+    console.log(githubUser)
+
+    userService.getUserByGithubId(githubUser.id)
     .then(function(user) {
         if (user === null) {
             logger.debug('User does not exist, creating');
 
             return userService.createUser({
-                name: user.name,
+                name: githubUser.displayName,
                 role: 'normal',
-                githubId: req.user.id,
-                githubUsername: req.user.username
+                githubId: githubUser.id,
+                githubUsername: githubUser.username
             });
         }
 

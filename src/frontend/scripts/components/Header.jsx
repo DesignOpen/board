@@ -8,6 +8,9 @@ var Header = React.createClass({
 
     render: function render() {
         var user = this.props.user;
+        var userName = user
+            ? <p>{user.name}</p>
+            : null;
 
         return (
             <header>
@@ -22,6 +25,7 @@ var Header = React.createClass({
                     looking for design contributions.</h5>
                 </div>
 
+                {userName}
                 {this.content(user, this._getLogoutUrl, this._getLoginUrl)}
 
             </header>
