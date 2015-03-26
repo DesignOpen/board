@@ -30,7 +30,6 @@ var Index = React.createClass({
         this.updateData();
     },
 
-
     _getPageContent: function _getPageContent(props) {
         var posts = _.map(props.data, transform.transformPost);
 

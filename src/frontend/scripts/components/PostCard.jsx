@@ -2,8 +2,6 @@ var React = require('react');
 var Router = require('react-router');
 var Link = Router.Link;
 
-var dateUtil = require('../utils/date-util.jsx');
-
 var DATE_FORMAT = 'MMM D';
 
 var PostCard = React.createClass({

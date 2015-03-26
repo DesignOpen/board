@@ -1,8 +1,8 @@
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 
-function createUser(user) {
-    var user = new User(user);
+function createUser(newUser) {
+    var user = new User(newUser);
     return user.saveAsync();
 }
 

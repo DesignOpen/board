@@ -1,4 +1,3 @@
-var _ = require('lodash');
 var React = require('react');
 var Router = require('react-router');
 var postActionCreator = require('../actions/post-action-creator.jsx');

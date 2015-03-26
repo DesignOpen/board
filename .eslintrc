@@ -29,10 +29,14 @@
         "jsx": true
     },
 
+    "plugins": [
+        "react"
+    ],
+
     "rules": {
         "dot-notation":         0, // allow obj['somePropertyName']
         "new-cap":              0, // do not require 'new' keyword, allows i.e. "var promise = $.Deferred()"
-        "no-alert":             1, // disencourage alert() and confirm()
+        "no-alert":             0, // disencourage alert() and confirm()
         "no-console":           0,
         "no-mixed-spaces-and-tabs": 1,
         "no-space-before-semi": 1,

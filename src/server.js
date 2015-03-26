@@ -134,7 +134,7 @@ app.use(session({
     saveUninitialized: true,
     resave: true,
     store: new MongoStore({
-         mongooseConnection: mongoose.connection
+        mongooseConnection: mongoose.connection
     })
 }));
 app.use(compression({
@@ -170,7 +170,6 @@ process.on('SIGTERM', function() {
     server.close(function() {
         logger.info('Close mongodb connection');
         mongoose.disconnect();
-        process.exit(0);
     });
 });
 

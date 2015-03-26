@@ -34,7 +34,6 @@
         "try",
         "catch"
     ],
-    "requireOperatorBeforeLineBreak": true,
     "requireSpaceAfterBinaryOperators": true,
     "requireSpaceAfterKeywords": [
         "do",

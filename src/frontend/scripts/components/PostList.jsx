@@ -37,4 +37,4 @@ var PostList = React.createClass({
     }
 });
 
-module.exports = PostList
+module.exports = PostList;

@@ -24,7 +24,7 @@ var Project = React.createClass({
 
     statics: {
         fetchData: function fetchData(routeState) {
-            return postService.getPostById(routeState.params.id)
+            return postService.getPostById(routeState.params.id);
         }
     },
 
