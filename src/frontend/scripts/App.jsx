@@ -27,16 +27,18 @@ var App = React.createClass({
 
     render: function render() {
         // Elements which appear in all pages should be here
+        var user = this.state.user;
+
         return (
             <div>
-                <Header />
+                <Header user={user} />
                 <RouteHandler
                     data={this.state.pageData}
-                    user={this.state.user}
+                    user={user}
                     params={this.props.params}
                     query={this.props.query}
                     fetchData={this._fetchData} />
-                <Footer />
+                <Footer user={user} />
             </div>
         );
     },

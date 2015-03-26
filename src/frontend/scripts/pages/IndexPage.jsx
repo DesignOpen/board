@@ -32,15 +32,18 @@ var Index = React.createClass({
 
     _getPageContent: function _getPageContent(props) {
         var posts = _.map(props.data, transform.transformPost);
-
         return (
             <div className="page-content">
-                <Link className="link-animated" to="new-post">Create new post</Link>
+                {this.content(
+                    props.user,
+                    <Link className="link-animated" to="new-post">Create new post</Link>,
+                    null
+                )}
                 <h2>Recent posts</h2>
                 <PostList posts={posts}/>
             </div>
         );
-    }
+    },
 });
 
 module.exports = Index;

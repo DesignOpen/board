@@ -3,6 +3,7 @@
 var _ = require('lodash');
 var React = require('react');
 var Loader = require('../components/Loader.jsx');
+var constants = require('../../../constants');
 
 var UtilMixin = {
     getInitialState: function getInitialState() {
@@ -56,6 +57,39 @@ var UtilMixin = {
                 <Loader />
             </div>
         );
+    },
+
+    roleAndAboveContent: function roleAndAboveContent(user, role, access, noAccess) {
+        var roleLevel = constants.roleLevels[role];
+        if (user.role.level >= roleLevel) {
+            if (_.isFunction(access)) {
+                return access(user);
+            }
+
+            return access;
+        }
+
+        if (_.isFunction(noAccess)) {
+            return noAccess(user);
+        }
+
+        return noAccess;
+    },
+
+    content: function content(user, logged, notLogged) {
+        if (user) {
+            if (_.isFunction(logged)) {
+                return logged(user);
+            }
+
+            return logged;
+        }
+
+        if (_.isFunction(notLogged)) {
+            return notLogged(user);
+        }
+
+        return notLogged;
     },
 
     updateData: function updateData(opts) {
