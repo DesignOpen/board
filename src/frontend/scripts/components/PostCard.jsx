@@ -16,7 +16,7 @@ var PostCard = React.createClass({
         return (
             <article className="post-card">
                 <Link to="post" params={{id: post.id}}>
-                    <h2>{post.name}</h2>
+                    <h2 className="post-card-header">{post.name}</h2>
                 </Link>
 
                 <h4 className="date">{formattedCreatedAt}</h4>
