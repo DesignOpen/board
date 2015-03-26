@@ -85,6 +85,8 @@ Add heroku remotes to your git repo:
     git remote add qa git@heroku.com:designopen-board-qa.git
     git remote add prod git@heroku.com:designopen-board.git
 
+If you don't have rights to push to the remote and get this error: `Permission denied (publickey)`. See [Adding keys to Heroku](https://devcenter.heroku.com/articles/keys#adding-keys-to-heroku).
+
 ### 3. Install npm modules:
 
 In project root:
@@ -120,56 +122,3 @@ Release flow:
 
 
 4. Check that the environment responds and logs look ok
-
-
-## API
-
-
-### Routes
-
-Get user
-    GET /users
-
-Create user
-    POST /users
-
-Get user with id
-    GET /users/:id
-
-Update user with id
-    PUT /users/:id
-
-Create new post
-    POST /posts
-
-Get post with id
-    GET /posts/:id
-
-Update post with id
-    PUT /posts/:id
-
-
-### Models
-
-#### Post
-
-```
-{
-    "description": "",
-    "author": "",
-    "project": "",
-    "created_at": "",
-    "modified_at": "",
-    "content": "",
-    "title": ""
-}
-```
-
-#### User
-
-```
-{
-    "name": "",
-    "github_user":
-}
-```
