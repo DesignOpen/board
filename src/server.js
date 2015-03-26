@@ -35,8 +35,6 @@ if (process.env.NODE_ENV === 'production') {
     });
 }
 
-var SERVE_PORT = process.env.PORT || 80;
-
 if (!process.env.MONGOLAB_URI) {
     logger.error('Environment variables not set!');
     logger.error('In local development, use command:');
@@ -84,7 +82,7 @@ passport.deserializeUser(function(id, done) {
 passport.use(new GitHubStrategy({
         clientID: process.env.GITHUB_CLIENT_ID,
         clientSecret: process.env.GITHUB_CLIENT_SECRET,
-        callbackURL: 'http://127.0.0.1:' + SERVE_PORT + '/api/session/callback/github'
+        callbackURL: config.githubCallbackUrl
     },
     function(accessToken, refreshToken, profile, done) {
         logger.debug('GitHubStrategy callback');
@@ -155,10 +153,10 @@ routes.initRoutes(app);
 app.use(errorhandler());
 
 // Start server
-var server = app.listen(SERVE_PORT, function() {
+var server = app.listen(config.port, function() {
     logger.info(
         'Express server listening on port %d in %s mode',
-        SERVE_PORT,
+        config.port,
         app.get('env')
     );
 });
