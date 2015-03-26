@@ -1,10 +1,12 @@
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 
-function createUser(name, githubAccount) {
+function createUser(name, role, githubId, githubUsername) {
     var user = new User({
         name: name,
-        githubAccount: githubAccount
+        role: role,
+        githubId: githubId,
+        githubUsername: githubUsername
     });
 
     return user.saveAsync();
@@ -14,7 +16,17 @@ function getUsers() {
     return User.findAsync({});
 }
 
+function getUserById(id) {
+    return User.findOneAsync({_id: id});
+}
+
+function getUserByGithubId(githubId) {
+    return User.findOneAsync({githubId: githubId});
+}
+
 module.exports = {
     createUser: createUser,
-    getUsers: getUsers
+    getUsers: getUsers,
+    getUserById: getUserById,
+    getUserByGithubId: getUserByGithubId
 };

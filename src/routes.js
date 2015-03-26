@@ -1,7 +1,9 @@
 var express = require('express');
+var passport = require('passport');
 
 var postController = require('./controllers/post-controller');
 var userController = require('./controllers/user-controller');
+var sessionController = require('./controllers/session-controller');
 var categoryController = require('./controllers/category-controller');
 var config = require('./config');
 var runReactRoute = require('./reactRoutes.js');
@@ -22,6 +24,20 @@ function initRoutes(app) {
     app.get('/api/categories/:id', categoryController.getCategoryById);
     app.delete('/api/categories/:id', categoryController.deleteCategoryById);
     app.put('/api/categories/:id', categoryController.putCategoryById);
+
+    app.delete('/api/session', sessionController.deleteSession);
+
+    // Routes for GitHub authentication
+    // For convenience, these routes do not follow REST as well as the other
+    // routes.
+    app.get('/api/session', sessionController.getSession);
+    app.get('/api/session/create', passport.authenticate('github'));
+    app.get('/api/session/delete', sessionController.deleteSession);
+    app.get(
+        '/api/session/callback/github',
+        passport.authenticate('github', { failureRedirect: '/' }),
+        sessionController.githubCallback
+    );
 
     app.use('/', express.static(config.serveDir, {
         // We don't want that / would serve /index.html, because that is

@@ -38,7 +38,7 @@ var Index = React.createClass({
 
         return (
             <div className="page-content">
-                <Link to="new-post">Create new post</Link>
+                <Link className="link-animated" to="new-post">Create new post</Link>
                 <h2>Recent posts</h2>
                 <PostList posts={posts}/>
             </div>

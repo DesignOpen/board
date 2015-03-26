@@ -20,6 +20,9 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var compression = require('compression');
+var passport = require('passport');
+var passportGithub = require('passport-github');
+var GitHubStrategy = passportGithub.Strategy;
 var log4js = require('log4js');
 var logger = log4js.getLogger(path.basename(__filename));
 
@@ -30,6 +33,8 @@ if (process.env.NODE_ENV === 'production') {
         replaceConsole: true
     });
 }
+
+var SERVE_PORT = process.env.PORT || 80;
 
 if (!process.env.MONGOLAB_URI) {
     logger.error('Environment variables not set!');
@@ -57,6 +62,29 @@ fs.readdirSync(modelsPath).forEach(function(file) {
         require(modelsPath + '/' + file);
     }
 });
+
+// Use Github strategy with passport
+
+passport.serializeUser(function(user, done) {
+    logger.debug('serializeUser', user, done);
+    done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+    logger.debug('deserializeUser', user, done);
+    done(null, user);
+});
+
+passport.use(new GitHubStrategy({
+        clientID: process.env.GITHUB_CLIENT_ID,
+        clientSecret: process.env.GITHUB_CLIENT_SECRET,
+        callbackURL: 'http://127.0.0.1:' + SERVE_PORT + '/api/session/callback/github'
+    },
+    function(accessToken, refreshToken, profile, done) {
+        logger.debug('GitHubStrategy callback');
+        return done(null, profile);
+    }
+));
 
 var app = express();
 
@@ -105,6 +133,10 @@ app.use(compression({
     threshold: 10
 }));
 
+// Initialize passport
+app.use(passport.initialize());
+app.use(passport.session());
+
 // Initialize routes. This must be done after models are registered
 // for mongoose
 var routes = require('./routes');
@@ -114,11 +146,10 @@ routes.initRoutes(app);
 app.use(errorhandler());
 
 // Start server
-var port = process.env.PORT;
-var server = app.listen(port || 80, function() {
+var server = app.listen(SERVE_PORT, function() {
     logger.info(
         'Express server listening on port %d in %s mode',
-        port,
+        SERVE_PORT,
         app.get('env')
     );
 });
