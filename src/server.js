@@ -69,7 +69,7 @@ passport.serializeUser(function(user, done) {
 
 var userService = require('./services/user-service');
 passport.deserializeUser(function(id, done) {
-    userService.getUserByGithubId(id)
+    userService.findByGithubId(id)
     .then(function(user) {
         logger.debug('deserializeUser, found user', user);
         done(null, user);
@@ -80,8 +80,8 @@ passport.deserializeUser(function(id, done) {
 });
 
 passport.use(new GitHubStrategy({
-        clientID: process.env.GITHUB_CLIENT_ID,
-        clientSecret: process.env.GITHUB_CLIENT_SECRET,
+        clientID: config.githubClientId,
+        clientSecret: config.githubClientSecret,
         callbackURL: config.githubCallbackUrl
     },
     function(accessToken, refreshToken, profile, done) {
@@ -150,6 +150,15 @@ var routes = require('./routes');
 routes.initRoutes(app);
 
 // Handle errors
+var ValidationError = mongoose.Error.ValidationError;
+app.use(function(err, req, res, next) {
+    if (err instanceof ValidationError) {
+        logger.error('Mongoose validation error. Errors:')
+        logger.error(err.errors);
+    }
+
+    next(err);
+});
 app.use(errorhandler());
 
 // Start server

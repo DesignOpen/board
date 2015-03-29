@@ -1,9 +1,11 @@
 var React = require('react');
+var appUtil = require('../utils/app-util.jsx');
 
 var PostInfo = React.createClass({
     render: function render() {
         var post = this.props.post;
 
+        var githubUserUrl = 'https://github.com/' + post.author.githubUsername;
         return (
             <ul className="post-info">
                 <li>
@@ -12,23 +14,14 @@ var PostInfo = React.createClass({
                 </li>
                 <li>
                     <h3>Post Author</h3>
-                    <p>John Smith</p>
-                </li>
-                <li>
-                    <h3>Last Commit</h3>
-                    <p>Yesterday</p>
-                </li>
-                <li>
-                    <h3>Organization</h3>
-                    <p>Sass</p>
-                </li>
-                <li>
-                    <h3>Forks Count</h3>
-                    <p>9</p>
-                </li>
-                <li>
-                    <h3>Watchers</h3>
-                    <p>8</p>
+                    <img
+                        className="post-author-avatar"
+                        src={appUtil.apiUrl('/users/' + post.author.id + '/avatar')} />
+                    <p>
+                        <a className="link-animated" href={githubUserUrl}>
+                            {post.author.name}
+                        </a>
+                    </p>
                 </li>
             </ul>
         );

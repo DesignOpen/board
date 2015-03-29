@@ -20,7 +20,7 @@ function githubCallback(req, res) {
     var githubUser = req.user;
     console.log(githubUser)
 
-    userService.getUserByGithubId(githubUser.id)
+    userService.findByGithubId(githubUser.id)
     .then(function(user) {
         if (user === null) {
             logger.debug('User does not exist, creating');

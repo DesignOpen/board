@@ -1,4 +1,5 @@
 var postService = require('../services/post-service');
+var userService = require('../services/user-service');
 
 function getPosts(req, res, next) {
     postService.getPosts()
@@ -17,9 +18,18 @@ function getPostById(req, res, next) {
 }
 
 function postPost(req, res, next) {
-    postService.createPost(req.body)
+    return userService.findById(req.user.id)
+    .then(function(user) {
+        if (!user) {
+            var err = new Error('User could not be found.')
+            err.status = 400
+            throw err;
+        }
+
+        return postService.createPost(user, req.body);
+    })
     .then(function(post) {
-        res.json(post);
+        return res.json(post);
     })
     .catch(next);
 }

@@ -10,17 +10,17 @@ function getUsers() {
     return User.findAsync({});
 }
 
-function getUserById(id) {
+function findById(id) {
     return User.findOneAsync({_id: id});
 }
 
-function getUserByGithubId(githubId) {
+function findByGithubId(githubId) {
     return User.findOneAsync({githubId: githubId});
 }
 
 module.exports = {
     createUser: createUser,
     getUsers: getUsers,
-    getUserById: getUserById,
-    getUserByGithubId: getUserByGithubId
+    findById: findById,
+    findByGithubId: findByGithubId
 };

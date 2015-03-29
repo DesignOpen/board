@@ -1,18 +1,24 @@
+var _ = require('lodash');
 var mongoose = require('mongoose');
+var userService = require('./user-service');
 var Post = mongoose.model('Post');
 
-function createPost(postJson) {
-    var post = new Post(postJson);
+
+function createPost(user, postJson) {
+    var newPost = _.extend(postJson, {
+        author: user._id
+    });
+    var post = new Post(newPost);
 
     return post.saveAsync();
 }
 
 function getPosts() {
-    return Post.findAsync({});
+    return Post.find({}).populate('author').execAsync();
 }
 
 function getPostById(id) {
-    return Post.findByIdAsync(id);
+    return Post.findById(id).populate('author').execAsync();
 }
 
 function deletePostById(id) {
@@ -20,7 +26,7 @@ function deletePostById(id) {
 }
 
 function updatePostById(id, name) {
-    return Post.findByIdAndUpdateAsync(id, {name: name});
+    return Post.findByIdAndUpdate(id, {name: name}).populate('author').execAsync();
 }
 
 module.exports = {

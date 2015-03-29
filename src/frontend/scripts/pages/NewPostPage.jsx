@@ -64,8 +64,9 @@ var NewPostPage = React.createClass({
             self.transitionTo('post', {id: post.id});
         })
         .catch(function(err) {
-            var message = err.body.error.message;
+            var message = err.body ? err.body.error.message : err.message;
             self.showMessage('error', 'Error saving post:', message);
+            console.error(err);
         })
         .finally(this.hideLoaderSafe);
     }

@@ -18,6 +18,7 @@ function initRoutes(app) {
     app.get('/api/users', userController.getUsers);
     app.post('/api/users', userController.postUser);
     app.get('/api/users/:id', userController.getUserById);
+    app.get('/api/users/:id/avatar', userController.getUserAvatarById);
 
     app.get('/api/categories', categoryController.getCategories);
     app.post('/api/categories', categoryController.postCategory);

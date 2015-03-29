@@ -20,6 +20,8 @@ var config = {
 
     // Github callback url. Depends on environment
     githubCallbackUrl: process.env.GITHUB_CALLBACK_URL || defaultGithubCallback,
+    githubClientId: process.env.GITHUB_CLIENT_ID,
+    githubClientSecret: process.env.GITHUB_CLIENT_SECRET
 };
 
 module.exports = config;
