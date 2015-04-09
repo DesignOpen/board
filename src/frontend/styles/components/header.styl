@@ -3,28 +3,53 @@ header
   border-style solid
   border-color #e6e6e6
 
-  h1
-    font-weight 700
-    color #cf4
-    text-transform uppercase
+  .logo
+    h1
+      font-weight 700
+      color #cf4
+      text-transform uppercase
 
-  span
-    display table
-    margin 0 auto
-    text-align center
+    span
+      display table
+      margin 0 auto
+      text-align center
 
-  span:first-child
-    font-size 36px
-    color #3d3d3d
+    span:first-child
+      font-size 36px
+      color #3d3d3d
 
-  span:last-child 
-    font-size 30px
-    color #f2f2f2
-    background #3d3d3d
+    span:last-child 
+      font-size 30px
+      color #f2f2f2
+      background #3d3d3d
 
-/*
-.header h5
-  max-width 210px
-  margin 0 auto
-  padding 20px 0
-*/
+  .github-button
+    display inline-block
+    padding 8px
+    border 1px solid $blue
+    border-radius 5px
+    transition: all 0.2s ease-in;
+  
+    svg, img
+      display inline
+      margin 0 15px 0 0
+      fill currentcolor
+
+    img
+      height 32px
+      width 32px
+      border-radius 50%
+  
+    span
+      display inline
+      font-size $font-size-normal
+      margin-bottom 16px
+
+  .github-button:hover
+    background-color $blue
+
+  a:hover
+    color #fff
+
+  .github-button > *
+    vertical-align middle
