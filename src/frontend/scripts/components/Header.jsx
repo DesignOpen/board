@@ -16,10 +16,12 @@ var Header = React.createClass({
             <header>
                 <div className="box">
                     <div className="logo">
-                        <h1>
-                            <span>Design Open</span>
-                            <span>Project Board</span>
-                        </h1>
+                        <Link to="index">
+                            <h1>
+                                <span>Design Open</span>
+                                <span>Project Board</span>
+                            </h1>
+                        </Link>
                     </div>
                     <h5>A collection of open source projects
                     looking for design contributions.</h5>
