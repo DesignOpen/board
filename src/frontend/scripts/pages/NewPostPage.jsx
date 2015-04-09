@@ -8,7 +8,7 @@ var NewPostPage = React.createClass({
 
     render: function render() {
         return (
-            <div className="page">
+            <div className="page new-post-page">
                 {this.getLoaderElement()}
                 {this._getPageContent(this.props)}
             </div>
@@ -17,7 +17,7 @@ var NewPostPage = React.createClass({
 
     _getPageContent: function _getPageContent() {
         return (
-            <div className="page new-post-page">
+            <div className="page-content">
                 <h1>New post</h1>
 
                 <label htmlFor="name-input">Name</label>

@@ -15,7 +15,7 @@ var Project = React.createClass({
 
     render: function render() {
         return (
-            <div className="page">
+            <div className="page post-page">
                 {this.getLoaderElement()}
                 {this._getPageContent(this.props)}
             </div>

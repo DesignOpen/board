@@ -1,14 +1,23 @@
 .post-card
   border-bottom 1px solid #e6e6e6
   position relative
+  padding 10px 3px
+
+  &:hover
+    .post-card-header
+      color darken($blue, 40%)
 
   .date
     position absolute
-    bottom 5px
     right 0
-    font-size $font-size-normal
-    font-weight 600
+    bottom 0
+    margin 2px 5px
+    font-size $font-size-small
+    font-weight bold
     color $light-color
 
   .post-card-header
-    font-size $font-size-x-large  
+    margin 0
+    font-size $font-size-x-large
+
+

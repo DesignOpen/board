@@ -14,14 +14,16 @@ var PostInfo = React.createClass({
                 </li>
                 <li>
                     <h3>Post Author</h3>
-                    <img
-                        className="post-author-avatar"
-                        src={appUtil.apiUrl('/users/' + post.author.id + '/avatar')} />
-                    <p>
-                        <a className="link-animated" href={githubUserUrl}>
-                            {post.author.name}
-                        </a>
-                    </p>
+
+                    <div className="post-author-avatar">
+                        <img
+                            src={appUtil.apiUrl('/users/' + post.author.id + '/avatar')} />
+                        <p className="post-author-name">
+                            <a className="link-animated" href={githubUserUrl}>
+                                {post.author.name}
+                            </a>
+                        </p>
+                    </div>
                 </li>
             </ul>
         );
