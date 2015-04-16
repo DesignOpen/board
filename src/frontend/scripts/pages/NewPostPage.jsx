@@ -36,15 +36,15 @@ var NewPostPage = React.createClass({
                     type="text"
                     ref="description" />
 
-                <label htmlFor="content-input">Content</label>
-                <textarea id="content-input" ref="content" />
+                <label>Content</label>
+                <MarkdownInput />
 
                 <button
                     disabled={this.isLoaderVisible()}
                     onClick={this._onSubmit}>
                     Create
                 </button>
-                <MarkdownInput />
+                <MarkdownInput onChange={this._onEditorInputChange}/>
             </div>
         );
     },
@@ -72,6 +72,10 @@ var NewPostPage = React.createClass({
             console.error(err);
         })
         .finally(this.hideLoaderSafe);
+    },
+
+    _onEditorInputChange: function _onEditorInputChange(markdown) {
+        console.log(markdown);
     }
 });
 
