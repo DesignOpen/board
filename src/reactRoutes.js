@@ -35,7 +35,7 @@ function _handleRouteMatch(req, res, Handler, state) {
         };
     }
 
-    return Component.fetchData(state).then(function(data) {
+    return Component.fetchData(state, req.user).then(function(data) {
         _renderPage(req, res, Handler, state, data);
     });
 }

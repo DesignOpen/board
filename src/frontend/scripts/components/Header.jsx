@@ -30,9 +30,8 @@ var Header = React.createClass({
                     looking for design contributions.</h5>
                 </div>
 
-                {userName}
                 {this.content(
-                    user, 
+                    user,
                     _.bind(this._getLogoutUrl, this, user),
                     this._getLoginUrl
                 )}

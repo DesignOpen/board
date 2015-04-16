@@ -1,12 +1,13 @@
+var _ = require('lodash');
 var React = require('react');
 var Router = require('react-router');
+var Select = require('react-select');
 var postActionCreator = require('../actions/post-action-creator.jsx');
 var UtilMixin = require('../mixins/UtilMixin.jsx');
-var MarkdownInput = require('../components/MarkdownInput.jsx');
-
+var userService = require('../../../services/user-service');
 
 var NewPostPage = React.createClass({
-    mixins: [UtilMixin, Router.Navigation],
+    mixins: [Router.State, UtilMixin, Router.Navigation],
 
     render: function render() {
         return (
@@ -17,10 +18,28 @@ var NewPostPage = React.createClass({
         );
     },
 
+    statics: {
+        fetchData: function fetchData(routeState, user) {
+            return userService.getReposById(user.id);
+        }
+    },
+
+    componentDidMount: function componentDidMount() {
+        this.updateData();
+    },
+
     _getPageContent: function _getPageContent() {
+        var projects = _.map(this.props.data, function(repo) {
+            return {value: repo.full_name, label: repo.full_name};
+        });
+
         return (
             <div className="page-content">
                 <h1>New post</h1>
+                <Select
+                    name="project-selection"
+                    options={projects}
+                    onChange={function(){}} />
 
                 <label htmlFor="name-input">Name</label>
                 <input
@@ -44,7 +63,6 @@ var NewPostPage = React.createClass({
                     onClick={this._onSubmit}>
                     Create
                 </button>
-                <MarkdownInput />
             </div>
         );
     },
