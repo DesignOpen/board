@@ -1,15 +1,24 @@
 var React = require('react');
-var marked = require('react-marked');
+var marked = require('marked');
 
 var PostContent = React.createClass({
     render: function render() {
         var post = this.props.post;
-        var renderedContent = marked(post.content);
+        // Set "dangerously" inner html because marked returns
+        // rendered html as a string. It removes <script> tags
+        // and other dangerous stuff.
+        // SECURITY: This is a slight security concern! All XSS bugs
+        //           in marked will affect our app too.
+        var html = {
+            __html: marked(post.content, {
+                sanitize: true
+            })
+        };
 
         return (
-            <div className="post-content">
-                <p>{renderedContent}</p>
-            </div>
+            <div
+                className="post-content"
+                dangerouslySetInnerHTML={html} />
         );
     }
 });
