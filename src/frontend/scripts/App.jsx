@@ -28,7 +28,6 @@ var App = React.createClass({
     render: function render() {
         // Elements which appear in all pages should be here
         var user = this.state.user;
-
         return (
             <div>
                 <Header user={user} />

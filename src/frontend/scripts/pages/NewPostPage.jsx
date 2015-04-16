@@ -2,6 +2,8 @@ var React = require('react');
 var Router = require('react-router');
 var postActionCreator = require('../actions/post-action-creator.jsx');
 var UtilMixin = require('../mixins/UtilMixin.jsx');
+var MarkdownInput = require('../components/MarkdownInput.jsx');
+
 
 var NewPostPage = React.createClass({
     mixins: [UtilMixin, Router.Navigation],
@@ -42,6 +44,7 @@ var NewPostPage = React.createClass({
                     onClick={this._onSubmit}>
                     Create
                 </button>
+                <MarkdownInput />
             </div>
         );
     },
