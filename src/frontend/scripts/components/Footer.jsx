@@ -21,7 +21,11 @@ var Footer = React.createClass({
                     </div>
 
                     <div className="eight columns footer-right">
-                        A part of <a className="link-animated" href="http://designopen.org/">DesignOpen.org</a>.
+                    <p>
+                        A part of <a className="link-animated" href="http://designopen.org/">DesignOpen.org</a>,
+                        organisation to help designers to contribute to open source.
+
+                    </p>
                     </div>
                 </div>
             </footer>

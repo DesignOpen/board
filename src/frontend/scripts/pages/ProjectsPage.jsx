@@ -32,10 +32,9 @@ var ProjectsPage = React.createClass({
 
     _getPageContent: function _getPageContent(props) {
         var posts = _.map(props.data, transform.transformPost);
-        console.log(props.data)
         return (
             <div className="page-content container">
-                <h4>Recent posts</h4>
+                <h4>Recent projects</h4>
                 <PostList posts={posts}/>
             </div>
         );
