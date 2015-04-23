@@ -1,12 +1,20 @@
+var _ = require('lodash');
 var React = require('react');
 var Router = require('react-router');
+var Select = require('react-select');
+var toMarkdown = require('to-markdown');
 var postActionCreator = require('../actions/post-action-creator.jsx');
 var UtilMixin = require('../mixins/UtilMixin.jsx');
+var userService = require('../../../services/user-service');
 var MediumEditorInput = require('../components/MediumEditorInput.jsx');
-var toMarkdown = require('to-markdown');
+
 
 var NewPostPage = React.createClass({
-    mixins: [UtilMixin, Router.Navigation],
+    mixins: [Router.State, UtilMixin, Router.Navigation],
+
+    getInitialState: function getInitialState() {
+        return {githubProjectId: null}
+    },
 
     getInitialState: function(){
         return {postHtmlContent: null};
@@ -21,24 +29,42 @@ var NewPostPage = React.createClass({
         );
     },
 
+    statics: {
+        fetchData: function fetchData(routeState, user) {
+            return userService.getReposById(user.id);
+        }
+    },
+
+    componentDidMount: function componentDidMount() {
+        this.updateData();
+    },
+
     _getPageContent: function _getPageContent() {
+        var projects = _.map(this.props.data, function(repo) {
+            return {value: String(repo.id), label: repo.full_name};
+        });
+        var selectedProject = _.findWhere(projects, {
+            value: this.state.githubProjectId
+        });
+
         return (
             <div className="page-content">
                 <h1>New post</h1>
 
-                <label htmlFor="name-input">Name</label>
+                <label>Project</label>
+                <Select
+                    name="project-selection"
+                    options={projects}
+                    value={selectedProject ? selectedProject.value : null}
+                    onChange={this._onProjectChange} />
+
+                <label htmlFor="name-input">Title</label>
                 <input
                     id="name-input"
-                    placeholder="Name"
+                    className="input"
+                    placeholder="Title"
                     type="text"
                     ref="name" />
-
-                <label htmlFor="description-input">Description</label>
-                <input
-                    id="description-input"
-                    placeholder="Description"
-                    type="text"
-                    ref="description" />
 
                 <label>Content</label>
                 <MediumEditorInput onChange={this._onEditorInputChange}/>
@@ -48,7 +74,6 @@ var NewPostPage = React.createClass({
                     onClick={this._onSubmit}>
                     Create
                 </button>
-
             </div>
         );
     },
@@ -56,8 +81,8 @@ var NewPostPage = React.createClass({
     _gatherInputData: function _gatherInputData() {
         return {
             name: this.refs.name.getDOMNode().value,
-            description: this.refs.description.getDOMNode().value,
-            content: toMarkdown( this.state.postHtmlContent )
+            content: toMarkdown(this.state.postHtmlContent),
+            githubProjectId: this.state.githubProjectId
         };
     },
 
@@ -78,8 +103,16 @@ var NewPostPage = React.createClass({
         .finally(this.hideLoaderSafe);
     },
 
+    _onProjectChange: function _onProjectChange(value) {
+        this.setState({
+            githubProjectId: value
+        });
+    },
+
     _onEditorInputChange: function _onEditorInputChange(htmlContent) {
-        this.setState({postHtmlContent: htmlContent});
+        this.setState({
+            postHtmlContent: htmlContent
+        });
     }
 });
 

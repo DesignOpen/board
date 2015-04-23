@@ -101,8 +101,9 @@ var UtilMixin = {
             params: this.getParams(),
             query: this.getQuery()
         };
+        var user = this.props.user;
 
-        var fetchPromise = this.props.fetchData(routeState);
+        var fetchPromise = this.props.fetchData(routeState, user);
 
         if (opts.showLoader) {
             this.showLoader();

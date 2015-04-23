@@ -15,18 +15,17 @@ function getUserById(req, res, next) {
 }
 
 function getUserAvatarById(req, res, next) {
-    userService.findById(req.params.id)
-    .then(function(user) {
-        if (!user) {
-            var err = new Error('User not found');
-            err.status = 404;
-            throw err;
-        }
-
-        return githubService.get('/users/' + user.githubUsername);
-    })
+    userService.getGithubUserById(req.params.id)
     .then(function(githubUser) {
         res.redirect(githubUser.avatar_url);
+    })
+    .catch(next);
+}
+
+function getUserReposById(req, res, next) {
+    userService.getReposById(req.params.id)
+    .then(function(repos) {
+        res.json(repos);
     })
     .catch(next);
 }
@@ -43,5 +42,6 @@ module.exports = {
     getUsers: getUsers,
     getUserById: getUserById,
     getUserAvatarById: getUserAvatarById,
+    getUserReposById: getUserReposById,
     postUser: postUser
 };
