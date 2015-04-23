@@ -1,7 +1,7 @@
 var React = require('react');
 
 
-var MarkdownInput = React.createClass({
+var MediumEditorInput = React.createClass({
     
     getDefaultProps: function getDefaultProps() {
         return {onChange: function(){}}
@@ -34,9 +34,12 @@ var MarkdownInput = React.createClass({
         var mediumEditor = new MediumEditor(editorElement, {
             placeholder: 'Enter text'
         });
-        mediumEditor.on(editorElement, 'change', this.props.onChange);
+        var self = this;
+        mediumEditor.on(editorElement, 'input', function() {
+            var serialized = mediumEditor.serialize(); 
+            self.props.onChange(serialized['element-0'].value); 
+        });
         this.setState({mediumEditor: mediumEditor});
-
     },
 
     componentWillUnmount: function componentWillUnmount() {
@@ -46,4 +49,4 @@ var MarkdownInput = React.createClass({
     }
 });
 
-module.exports = MarkdownInput;
+module.exports = MediumEditorInput;
