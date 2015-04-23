@@ -1,12 +1,18 @@
-a
+default-link()
   text-decoration none
   color $link-color
+  cursor pointer
+
+  &:visited
+    color $link-color
 
   &:hover
     color $link-color
 
-  &:visited
-    color $link-color
+
+a {
+  default-link()
+}
 
 .link-animated
   position relative

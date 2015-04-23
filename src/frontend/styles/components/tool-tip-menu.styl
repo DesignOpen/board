@@ -1,0 +1,99 @@
+@import 'links';
+
+/*
+To make clicking the small icon easier, make click area bigger.
+Keep dimensions as a square
+*/
+$click-area-width = 44px;
+$click-area-height = 44px;
+$image-width = 35px;
+$image-height = 35px;
+$triangle-size = 7px;
+
+// How far from the menu box edge arrow is positioned
+$triangle-offset = 10px;
+
+// This can be $triangle-offset at max
+$menu-border-radius = 3px;
+
+.tool-tip-menu {
+  .tool-tip-menu__button {
+    display: block;
+    width: $click-area-width;
+    height: $click-area-height;
+
+    > * {
+      width: $image-width;
+      height: $image-height;
+      margin: (($click-area-width - $image-width) / 2);
+    }
+  }
+}
+
+.tool-tip-menu__menu {
+  z-index: 100000;
+  position: absolute;
+  background: white;
+  list-style: none;
+  padding-top: $triangle-size;
+  border-radius: $menu-border-radius;
+  box-shadow: 1px 2px 12px -5px rgba(0, 0, 0, 0.2);
+  border: 1px solid #eee;
+  padding: 15px 40px 15px 20px;
+  margin: 0;
+
+  li {
+    cursor: pointer;
+    white-space: nowrap;
+    padding: 3px 0;
+    margin: 0;
+  }
+
+  &:before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-width: $triangle-size;
+    border-style: solid;
+  }
+
+  a {
+    default-link()
+  }
+
+  .tool-tip-menu__item--disabled > a {
+    color: #aaa;
+    cursor: default;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+.tool-tip-menu__menu--bottom-left {
+  top: $click-area-height;
+  right: ($click-area-width / 2 - $triangle-size - $triangle-offset);
+  margin-top: $triangle-size;
+
+  &:before {
+    bottom: 100%;
+    right: $triangle-offset;
+    border-bottom-color: white;
+  }
+}
+
+.tool-tip-menu__menu--bottom-right {
+  top: $click-area-height;
+  left: ($click-area-width / 2 - $triangle-size - $triangle-offset);
+  margin-top: $triangle-size;
+
+  &:before {
+    bottom: 100%;
+    left: $triangle-offset;
+    border-bottom-color: white;
+  }
+}

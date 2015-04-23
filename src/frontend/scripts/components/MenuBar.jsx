@@ -2,9 +2,9 @@ var React = require('react');
 var Router = require('react-router');
 var _ = require('lodash')
 var Link = Router.Link;
-
 var UtilMixin = require('../mixins/UtilMixin.jsx');
 var appUtil = require('../utils/app-util.jsx');
+var ToolTipMenu = require('./ToolTipMenu.jsx');
 
 var MenuBar = React.createClass({
     mixins: [UtilMixin],
@@ -57,6 +57,7 @@ var MenuBar = React.createClass({
     _getLoggedInContent: function _getLoggedInContent() {
         var user = this.props.user;
 
+        var smallAvatar = <img className="avatar-small" src={appUtil.apiUrl('/users/' + user.id + '/avatar')} />;
         return (
             <ul className="navbar-list">
                 <li className="navbar-item">
@@ -70,11 +71,21 @@ var MenuBar = React.createClass({
                     </Link>
                 </li>
                 <li className="navbar-item">
-                    <img className="avatar-small"
-                        src={appUtil.apiUrl('/users/' + user.id + '/avatar')} />
+                    <ToolTipMenu
+                        items={
+                            [{text: 'Logout'}]
+                        }
+                        onItemClick={this._onAvatarMenuItemClick}
+                        content={smallAvatar} />
                 </li>
             </ul>
         );
+    },
+
+    _onAvatarMenuItemClick: function _onAvatarMenuItemClick(index) {
+        if (index === 0) {
+            window.location.href = '/api/session/delete';
+        }
     }
 });
 

@@ -49,15 +49,19 @@ $inactive-link-color = #999;
     &:hover
       box-shadow 0 0 0 4px #333,0 0 0 7px #666
 
-  ul
+  > ul
     li
       /* Hack to keep items centered vertically */
       line-height 0.1em
+
   a
     color $inactive-link-color
 
-    &.active
-      color $active-link-color
+    &:visited
+      color $inactive-link-color
 
     &:hover
+      color $active-link-color
+
+    &.active
       color $active-link-color
