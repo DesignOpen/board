@@ -42,7 +42,8 @@
     "react": "^0.13.1",
     "react-router": "^0.13.2",
     "react-select": "^0.4.6",
-    "superagent": "^0.21.0"
+    "superagent": "^0.21.0",
+    "to-markdown": "^1.0.0-rc.7"
   },
   "devDependencies": {
     "autoprefixer": "^5.1.0",

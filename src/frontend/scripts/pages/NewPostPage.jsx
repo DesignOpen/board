@@ -2,15 +2,22 @@ var _ = require('lodash');
 var React = require('react');
 var Router = require('react-router');
 var Select = require('react-select');
+var toMarkdown = require('to-markdown');
 var postActionCreator = require('../actions/post-action-creator.jsx');
 var UtilMixin = require('../mixins/UtilMixin.jsx');
 var userService = require('../../../services/user-service');
+var MediumEditorInput = require('../components/MediumEditorInput.jsx');
+
 
 var NewPostPage = React.createClass({
     mixins: [Router.State, UtilMixin, Router.Navigation],
 
     getInitialState: function getInitialState() {
         return {githubProjectId: null}
+    },
+
+    getInitialState: function(){
+        return {postHtmlContent: null};
     },
 
     render: function render() {
@@ -59,8 +66,8 @@ var NewPostPage = React.createClass({
                     type="text"
                     ref="name" />
 
-                <label htmlFor="content-input">Content</label>
-                <textarea id="content-input" ref="content" />
+                <label>Content</label>
+                <MediumEditorInput onChange={this._onEditorInputChange}/>
 
                 <button
                     disabled={this.isLoaderVisible()}
@@ -74,7 +81,7 @@ var NewPostPage = React.createClass({
     _gatherInputData: function _gatherInputData() {
         return {
             name: this.refs.name.getDOMNode().value,
-            content: this.refs.content.getDOMNode().value,
+            content: toMarkdown(this.state.postHtmlContent),
             githubProjectId: this.state.githubProjectId
         };
     },
@@ -99,6 +106,12 @@ var NewPostPage = React.createClass({
     _onProjectChange: function _onProjectChange(value) {
         this.setState({
             githubProjectId: value
+        });
+    },
+
+    _onEditorInputChange: function _onEditorInputChange(htmlContent) {
+        this.setState({
+            postHtmlContent: htmlContent
         });
     }
 });

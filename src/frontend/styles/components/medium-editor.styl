@@ -1,0 +1,70 @@
+.medium-toolbar-arrow-under:after {
+  top: 60px;
+  border-color: darken($blue, 50%) transparent transparent transparent;
+}
+.medium-toolbar-arrow-over:before {
+  top: -8px;
+  border-color: transparent transparent darken($blue, 50%) transparent;
+}
+.medium-editor-toolbar {
+  background-color: $blue;
+}
+.medium-editor-toolbar li {
+  padding: 0;
+}
+.medium-editor-toolbar li button {
+  min-width: 60px;
+  height: 60px;
+  border: none;
+  border-right: 1px solid rgba(0,0,0,.25);
+  background-color: transparent;
+  color: #fff;
+  -webkit-transition: background-color .2s ease-in, color .2s ease-in;
+  transition: background-color .2s ease-in, color .2s ease-in;
+}
+.medium-editor-toolbar li button:hover {
+  background-color: darken($blue, 25%);
+  color: #fff;
+}
+.medium-editor-toolbar li .medium-editor-button-active {
+  background-color: $blue;
+  color: #fff;
+}
+.medium-editor-toolbar li .medium-editor-button-last {
+  border-right: none;
+}
+.medium-editor-toolbar-form .medium-editor-toolbar-input {
+  height: 60px;
+  background: $blue;
+  color: #fff;
+}
+.medium-editor-toolbar-form .medium-editor-toolbar-input::-webkit-input-placeholder {
+  color: #fff;
+  color: rgba(255, 255, 255, 0.8);
+}
+.medium-editor-toolbar-form .medium-editor-toolbar-input:-moz-placeholder {
+
+  /* Firefox 18- */
+  color: #fff;
+  color: rgba(255, 255, 255, 0.8);
+}
+.medium-editor-toolbar-form .medium-editor-toolbar-input::-moz-placeholder {
+
+  /* Firefox 19+ */
+  color: #fff;
+  color: rgba(255, 255, 255, 0.8);
+}
+.medium-editor-toolbar-form .medium-editor-toolbar-input:-ms-input-placeholder {
+  color: #fff;
+  color: rgba(255, 255, 255, 0.8);
+}
+.medium-editor-toolbar-form a {
+  color: #fff;
+}
+.medium-editor-toolbar-anchor-preview {
+  background: $blue;
+  color: #fff;
+}
+.medium-editor-placeholder:after {
+  color: #fff;
+}
