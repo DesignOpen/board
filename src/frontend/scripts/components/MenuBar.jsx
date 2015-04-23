@@ -14,9 +14,12 @@ var MenuBar = React.createClass({
         var userName = user
             ? <p>{user.name}</p>
             : null;
+        console.log('render')
 
         return (
             <nav className="menu-bar nav-bar">
+                {this.getLoaderElement()}
+
                 <div className="container">
                     <div className="logo">
                         <Link to="index">
@@ -53,7 +56,7 @@ var MenuBar = React.createClass({
                     </Link>
                 </li>
                 <li className="navbar-item">
-                    <a href="/api/session/create">
+                    <a onClick={this._onLoginClick} href="/api/session/create">
                         Login
                     </a>
                 </li>
@@ -93,6 +96,10 @@ var MenuBar = React.createClass({
         if (index === 0) {
             window.location.href = '/api/session/delete';
         }
+    },
+
+    _onLoginClick: function _onLoginClick() {
+        this.showLoader();
     }
 });
 
