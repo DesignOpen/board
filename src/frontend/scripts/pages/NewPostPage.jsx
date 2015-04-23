@@ -9,6 +9,10 @@ var userService = require('../../../services/user-service');
 var NewPostPage = React.createClass({
     mixins: [Router.State, UtilMixin, Router.Navigation],
 
+    getInitialState: function getInitialState() {
+        return {githubProjectId: null}
+    },
+
     render: function render() {
         return (
             <div className="page new-post-page">
@@ -30,30 +34,30 @@ var NewPostPage = React.createClass({
 
     _getPageContent: function _getPageContent() {
         var projects = _.map(this.props.data, function(repo) {
-            return {value: repo.full_name, label: repo.full_name};
+            return {value: String(repo.id), label: repo.full_name};
+        });
+        var selectedProject = _.findWhere(projects, {
+            value: this.state.githubProjectId
         });
 
         return (
             <div className="page-content">
                 <h1>New post</h1>
+
+                <label>Project</label>
                 <Select
                     name="project-selection"
                     options={projects}
-                    onChange={function(){}} />
+                    value={selectedProject ? selectedProject.value : null}
+                    onChange={this._onProjectChange} />
 
-                <label htmlFor="name-input">Name</label>
+                <label htmlFor="name-input">Title</label>
                 <input
                     id="name-input"
-                    placeholder="Name"
+                    className="input"
+                    placeholder="Title"
                     type="text"
                     ref="name" />
-
-                <label htmlFor="description-input">Description</label>
-                <input
-                    id="description-input"
-                    placeholder="Description"
-                    type="text"
-                    ref="description" />
 
                 <label htmlFor="content-input">Content</label>
                 <textarea id="content-input" ref="content" />
@@ -70,8 +74,8 @@ var NewPostPage = React.createClass({
     _gatherInputData: function _gatherInputData() {
         return {
             name: this.refs.name.getDOMNode().value,
-            description: this.refs.description.getDOMNode().value,
-            content: this.refs.content.getDOMNode().value
+            content: this.refs.content.getDOMNode().value,
+            githubProjectId: this.state.githubProjectId
         };
     },
 
@@ -90,6 +94,12 @@ var NewPostPage = React.createClass({
             console.error(err);
         })
         .finally(this.hideLoaderSafe);
+    },
+
+    _onProjectChange: function _onProjectChange(value) {
+        this.setState({
+            githubProjectId: value
+        });
     }
 });
 

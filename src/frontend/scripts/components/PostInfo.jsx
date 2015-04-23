@@ -9,10 +9,6 @@ var PostInfo = React.createClass({
         return (
             <ul className="post-info">
                 <li>
-                    <h3>Description</h3>
-                    <p>{post.description}</p>
-                </li>
-                <li>
                     <h3>Post Author</h3>
 
                     <div className="post-author-avatar">
