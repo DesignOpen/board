@@ -2,11 +2,15 @@ var React = require('react');
 var Router = require('react-router');
 var postActionCreator = require('../actions/post-action-creator.jsx');
 var UtilMixin = require('../mixins/UtilMixin.jsx');
-var MarkdownInput = require('../components/MarkdownInput.jsx');
-
+var MediumEditorInput = require('../components/MediumEditorInput.jsx');
+var toMarkdown = require('to-markdown');
 
 var NewPostPage = React.createClass({
     mixins: [UtilMixin, Router.Navigation],
+
+    getInitialState: function(){
+        return {postHtmlContent: null};
+    },
 
     render: function render() {
         return (
@@ -36,15 +40,15 @@ var NewPostPage = React.createClass({
                     type="text"
                     ref="description" />
 
-                <label htmlFor="content-input">Content</label>
-                <textarea id="content-input" ref="content" />
+                <label>Content</label>
+                <MediumEditorInput onChange={this._onEditorInputChange}/>
 
                 <button
                     disabled={this.isLoaderVisible()}
                     onClick={this._onSubmit}>
                     Create
                 </button>
-                <MarkdownInput />
+
             </div>
         );
     },
@@ -53,7 +57,7 @@ var NewPostPage = React.createClass({
         return {
             name: this.refs.name.getDOMNode().value,
             description: this.refs.description.getDOMNode().value,
-            content: this.refs.content.getDOMNode().value
+            content: toMarkdown( this.state.postHtmlContent )
         };
     },
 
@@ -72,6 +76,10 @@ var NewPostPage = React.createClass({
             console.error(err);
         })
         .finally(this.hideLoaderSafe);
+    },
+
+    _onEditorInputChange: function _onEditorInputChange(htmlContent) {
+        this.setState({postHtmlContent: htmlContent});
     }
 });
 
