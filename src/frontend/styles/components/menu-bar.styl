@@ -47,12 +47,17 @@ vertical-center() {
     height 33px
     width 1px
     background #666
+    hidden()
 
   .product-name
+    hidden()
     float left
     uppercase()
     line-height: 15px;
 
+  @media (min-width: $breakpoint-phablet)
+    .separator, .product-name
+      visible()
 
   .navbar-list
     float right
@@ -60,10 +65,20 @@ vertical-center() {
 
   .navbar-item
     float left
-    margin 0 0 0 20px
+
+    &:not(:first-child)
+      margin 0 0 0 10px
 
     > a
       uppercase()
+      font-size: 0.7rem
+
+    @media (min-width: $breakpoint-mobile)
+      &:not(:first-child)
+        margin 0 0 0 20px
+
+      > a
+        font-size: 0.8rem
 
   .avatar-small
     cursor pointer
@@ -92,3 +107,4 @@ vertical-center() {
 
     &.active
       color $active-link-color
+
