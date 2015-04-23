@@ -76,7 +76,7 @@ var UtilMixin = {
         return noAccess;
     },
 
-    content: function content(user, logged, notLogged) {
+    content: function content(user, notLogged, logged) {
         if (user) {
             if (_.isFunction(logged)) {
                 return logged(user);
@@ -98,8 +98,8 @@ var UtilMixin = {
         }, opts);
 
         var routeState = {
-            params: this.getParams(),
-            query: this.getQuery()
+            params: this.context.router.getCurrentParams(),
+            query: this.context.router.getCurrentQuery()
         };
         var user = this.props.user;
 

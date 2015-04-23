@@ -1,0 +1,63 @@
+$active-link-color = white;
+$inactive-link-color = #999;
+
+.menu-bar
+  height $menu-bar-size
+  background #333
+
+  .container
+    height 100%
+
+  .container > .logo, .navbar-item
+    position relative
+    top 50%
+    transform translateY(-50%)
+
+  .logo
+    float left
+    height 50px
+
+    a
+      display block
+      height 100%
+
+      &.active
+        svg g
+          fill $active-link-color
+
+    svg
+      height 100%
+      g
+        fill $inactive-link-color
+
+  .navbar-list
+    float right
+    height 100%
+
+  .navbar-item
+    float left
+    margin 0 0 0 20px
+
+  .avatar-small
+    cursor pointer
+    margin-left 10px
+    border-radius 50%
+    height 35px
+    width 35px
+    box-shadow 0 0 0 4px #333,0 0 0 7px #4e4d4d
+
+    &:hover
+      box-shadow 0 0 0 4px #333,0 0 0 7px #666
+
+  ul
+    li
+      /* Hack to keep items centered vertically */
+      line-height 0.1em
+  a
+    color $inactive-link-color
+
+    &.active
+      color $active-link-color
+
+    &:hover
+      color $active-link-color

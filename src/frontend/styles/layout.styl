@@ -1,50 +1,27 @@
 /*
 Rules related to page layout. These rules
-define where for example page content, header and footer are.
+define where for example page content, .menu-bar and .footer are.
 */
 
 .app > *
   display flex
-  min-height 100%;
-  flex-direction column;
+  min-height 100%
+  flex-direction column
 
 .page
+  height 100%
   flex 1
 
   .page-content
-    margin 0 40px 0 20px
+    padding 30px 0 80px 0
 
-header, footer
-  flex none
-
-footer
-  border-width 1px 0 0
+.menu-bar
+  height 200px
   width 100%
+  background #eee
 
-header
-  border-width 0 0 1px
-  padding 0 0 20px
+.footer
+  width 100%
+  background #eee
 
-header .box, footer .box
-  margin 0 auto
-  width 240px
 
-@media all and (min-width: 800px)
-  header
-    position fixed
-    right 0
-    border-width 0 0 0 1px
-    height 100%
-    padding 0 15px
-    width 270px
-
-  footer
-    position fixed
-    right 0
-    bottom 0
-    border-width 0
-    padding 0 15px 20px
-    width 270px
-
-  .page
-    margin-right 270px

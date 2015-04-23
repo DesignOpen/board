@@ -19,7 +19,7 @@
   color: #333333;
   cursor: default;
   outline: none;
-  padding: 8px 52px 8px 10px;
+  padding: 7px 52px 7px 10px;
   transition: all 200ms ease;
 }
 .Select-control:hover {
@@ -47,7 +47,7 @@
 }
 .Select-placeholder {
   color: #aaaaaa;
-  padding: 8px 52px 8px 10px;
+  padding: 7px 52px 7px 10px;
   position: absolute;
   top: 0;
   left: 0;
@@ -154,7 +154,7 @@
   color: #666666;
   cursor: pointer;
   display: block;
-  padding: 8px 10px;
+  padding: 7px 10px;
 }
 .Select-option:last-child {
   border-bottom-right-radius: 4px;
@@ -169,7 +169,7 @@
   color: #999999;
   cursor: default;
   display: block;
-  padding: 8px 10px;
+  padding: 7px 10px;
 }
 .Select.is-multi .Select-control {
   padding: 2px 52px 2px 3px;

@@ -8,10 +8,23 @@ body, html, .app
   display block
 
 .top-corner
-  position absolute
+  position fixed
   z-index 1000
   top 10px
   left 10px
 
 ul
   list-style none
+
+
+/*
+Set box sizing for all elements
+http://www.paulirish.com/2012/box-sizing-border-box-ftw/
+*/
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}

@@ -16,8 +16,8 @@ var PostContent = React.createClass({
         };
 
         return (
-            <div
-                className="post-content"
+            <article
+                className="post-content markdown-body"
                 dangerouslySetInnerHTML={html} />
         );
     }

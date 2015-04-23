@@ -1,6 +1,7 @@
 var _ = require('lodash');
 var React = require('react');
 var Router = require('react-router');
+var Link = Router.Link;
 var Select = require('react-select');
 var toMarkdown = require('to-markdown');
 var postActionCreator = require('../actions/post-action-creator.jsx');
@@ -22,7 +23,7 @@ var NewPostPage = React.createClass({
 
     render: function render() {
         return (
-            <div className="page new-post-page">
+            <div className="page container new-post-page">
                 {this.getLoaderElement()}
                 {this._getPageContent(this.props)}
             </div>
@@ -49,7 +50,7 @@ var NewPostPage = React.createClass({
 
         return (
             <div className="page-content">
-                <h1>New post</h1>
+                <h4>Submit a project</h4>
 
                 <label>Project</label>
                 <Select
@@ -66,13 +67,21 @@ var NewPostPage = React.createClass({
                     type="text"
                     ref="name" />
 
+                <label htmlFor="categories-input">Categories</label>
+                <input
+                    id="categories-input-input"
+                    className="input"
+                    placeholder="Categories separated with space"
+                    type="text"
+                    ref="categories" />
+
                 <label>Content</label>
                 <MediumEditorInput onChange={this._onEditorInputChange}/>
 
                 <button
                     disabled={this.isLoaderVisible()}
                     onClick={this._onSubmit}>
-                    Create
+                    Submit
                 </button>
             </div>
         );
@@ -81,6 +90,7 @@ var NewPostPage = React.createClass({
     _gatherInputData: function _gatherInputData() {
         return {
             name: this.refs.name.getDOMNode().value,
+            categories: this.refs.categories.getDOMNode().value,
             content: toMarkdown(this.state.postHtmlContent),
             githubProjectId: this.state.githubProjectId
         };

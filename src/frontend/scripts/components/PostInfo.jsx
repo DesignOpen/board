@@ -9,8 +9,6 @@ var PostInfo = React.createClass({
         return (
             <ul className="post-info">
                 <li>
-                    <h3>Post Author</h3>
-
                     <div className="post-author-avatar">
                         <img
                             src={appUtil.apiUrl('/users/' + post.author.id + '/avatar')} />

@@ -3,47 +3,35 @@ var React = require('react');
 var Router = require('react-router');
 var Link = Router.Link;
 
-var PostList = require('../components/PostList.jsx');
-var UtilMixin = require('../mixins/UtilMixin.jsx');
-var postService = require('../../../services/post-service');
-var transform = require('../api/post-transform.jsx');
-
-var Index = React.createClass({
-    mixins: [Router.State, UtilMixin],
-
+var IndexPage = React.createClass({
     render: function render() {
         return (
             <div className="page index-page">
-                {this.getLoaderElement()}
-                {this._getPageContent(this.props)}
+                <div className="page-content container">
+                    <h4>Project Board</h4>
+
+                    <div className="row">
+                        <div className="six columns">
+                            We think the best way to improve the design industry
+                            is to work in the open. Open source projects need
+                            designers as much as other any other projects, maybe
+                            more so. This project board lists projects looking
+                            for design contributions.
+                        </div>
+
+                        <div className="six columns">
+                            You don’t have to be an expert programmer to contribute
+                            to an open source project. Some interactions are best explained
+                            through an interactive prototype. This might take you out
+                            of your comfort zone a bit, but use contributing to an
+                            open source project as an excuse to sharpen your
+                            development skills, and add another tool to your toolbox.
+                        </div>
+                    </div>
+                </div>
             </div>
         );
-    },
-
-    statics: {
-        fetchData: function fetchData() {
-            return postService.getPosts();
-        }
-    },
-
-    componentDidMount: function componentDidMount() {
-        this.updateData();
-    },
-
-    _getPageContent: function _getPageContent(props) {
-        var posts = _.map(props.data, transform.transformPost);
-        return (
-            <div className="page-content">
-                {this.content(
-                    props.user,
-                    <Link className="link-animated" to="new-post">Create new post</Link>,
-                    null
-                )}
-                <h2>Recent posts</h2>
-                <PostList posts={posts}/>
-            </div>
-        );
-    },
+    }
 });
 
-module.exports = Index;
+module.exports = IndexPage;

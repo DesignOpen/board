@@ -14,10 +14,10 @@ var PostCard = React.createClass({
         return (
             <article className="post-card">
                 <Link to="post" params={{id: post.id}}>
-                    <h3 className="post-card-header">{post.name}</h3>
+                    <h6 className="post-card-header">{post.name}</h6>
                 </Link>
 
-                <h4 className="date">{formattedCreatedAt}</h4>
+                <h6 className="date">{formattedCreatedAt}</h6>
             </article>
         );
     }

@@ -3,7 +3,7 @@ var Router = require('react-router');
 var RouteHandler = Router.RouteHandler;
 
 var UtilMixin = require('./mixins/UtilMixin.jsx');
-var Header = require('./components/Header.jsx');
+var MenuBar = require('./components/MenuBar.jsx');
 var Footer = require('./components/Footer.jsx');
 
 var App = React.createClass({
@@ -30,7 +30,7 @@ var App = React.createClass({
         var user = this.state.user;
         return (
             <div>
-                <Header user={user} />
+                <MenuBar user={user} />
                 <RouteHandler
                     data={this.state.pageData}
                     user={user}

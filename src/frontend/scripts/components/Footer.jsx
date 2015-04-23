@@ -1,17 +1,48 @@
 var React = require('react');
+var Router = require('react-router');
+var Link = Router.Link;
+var UtilMixin = require('../mixins/UtilMixin.jsx');
 
 var Footer = React.createClass({
+    mixins: [UtilMixin],
+
     render: function render() {
         return (
-            <footer>
-                <div className="box">
-                    <p>Looking for design contributions?
-                       Login to post your open source project.</p>
-                    <p>A part of <a href="http://designopen.org/">DesignOpen.org</a></p>
+            <footer className="footer">
+                <div className="container row">
+                    <div className="four columns">
+                        {
+                            this.content(
+                                this.props.user,
+                                this._getLoggedOutContent,
+                                this._getLoggedInContent
+                            )
+                        }
+                    </div>
+
+                    <div className="eight columns footer-right">
+                        A part of <a className="link-animated" href="http://designopen.org/">DesignOpen.org</a>.
+                    </div>
                 </div>
             </footer>
         );
-    }
+    },
+
+    _getLoggedOutContent: function _getLoggedOutContent() {
+        return (
+            <p>Looking for design
+            contributions? <a className="link-animated" href="/api/session/create">Login</a> to
+            submit your open source project.</p>
+        )
+    },
+
+    _getLoggedInContent: function _getLoggedInContent() {
+        return (
+            <p>Looking for design
+            contributions? <Link to="new-post" className="link-animated">Submit</Link> your
+            open source project.</p>
+        )
+    },
 });
 
 module.exports = Footer;

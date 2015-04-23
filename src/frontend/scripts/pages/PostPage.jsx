@@ -40,7 +40,7 @@ var Project = React.createClass({
         var post = transform.transformPost(props.data);
 
         return (
-            <div className="page-content">
+            <div className="container page-content">
                 <PostCard post={post} />
                 <div className="post-details">
                     <PostInfo post={post} />
