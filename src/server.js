@@ -35,7 +35,7 @@ if (process.env.NODE_ENV === 'production') {
     });
 }
 
-if (!process.env.MONGOLAB_URI) {
+if (!process.env.DATABASE_URL) {
     logger.error('Environment variables not set!');
     logger.error('In local development, use command:');
     logger.error('\n    source local-env.sh\n');
@@ -47,7 +47,7 @@ if (!process.env.MONGOLAB_URI) {
 var config = require('./config');
 
 // Connect to database
-mongoose.connect(process.env.MONGOLAB_URI, config.mongoOptions);
+mongoose.connect(process.env.DATABASE_URL, config.mongoOptions);
 mongoose.connection.on('error', function(err) {
     logger.error('Error with MongoDB connection!');
     logger.error(err + '\n');
