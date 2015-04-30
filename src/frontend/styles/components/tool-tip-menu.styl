@@ -39,14 +39,15 @@ $menu-border-radius = 3px;
   border-radius: $menu-border-radius;
   box-shadow: 1px 2px 12px -5px rgba(0, 0, 0, 0.2);
   border: 1px solid #eee;
-  padding: 15px 40px 15px 20px;
+  padding: 15px 0 15px 0;
   margin: 0;
 
   li {
     cursor: pointer;
     white-space: nowrap;
-    padding: 3px 0;
     margin: 0;
+    display: block;
+
   }
 
   &:before {
@@ -62,6 +63,16 @@ $menu-border-radius = 3px;
 
   a {
     default-link()
+    padding: 3px 40px 3px 20px;
+    display: block;
+    border-color: transparent;
+    border-width: 1px 0 1px;
+    border-style: solid;
+  }
+
+  a:hover{
+    background-color:#eee;
+    border-color: darken(#eee, 2%);
   }
 
   .tool-tip-menu__item--disabled > a {
