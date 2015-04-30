@@ -105,6 +105,23 @@ To start local server:
 
 There's no live reload.
 
+### Database migrations
+
+Database migrations are handled with [node-db-migrate](https://github.com/db-migrate/node-db-migrate). When creating new migration scripts, see their [API documentation](https://github.com/db-migrate/node-db-migrate#migrations-api---sql). **Important:** Their MongoDB driver does not implement many of the functions mentioned in API, check [source code](https://github.com/db-migrate/node-db-migrate/blob/master/lib/driver/mongodb.js). They have documentation also here: http://db-migrate.readthedocs.org/en/v0.9.x/.
+
+**Note:** to use `db-migrate` command, you must install it globally with `npm install db-migrate -g`, otherwise you have to use: `./node_modules/db-migrate/bin/db-migrate`.
+
+Whenever you have data changes in models, you must create a new migration script:
+
+* `db-migrate create descriptive-name-for-the-migration`
+* Edit the created migration script template in `./migrations/`
+
+
+**Migration shortcuts**
+
+* [Column Specs](https://github.com/db-migrate/node-db-migrate#createtabletablename-columnspec-callback)
+* [Supported data types](https://github.com/db-migrate/node-db-migrate/blob/master/lib/data_type.js)
+
 ### Releasing
 
 Release flow:
