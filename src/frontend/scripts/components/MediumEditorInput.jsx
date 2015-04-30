@@ -37,7 +37,7 @@ var MediumEditorInput = React.createClass({
         var MediumEditor = require('medium-editor');
         var editorElement = React.findDOMNode(this.refs.editor);
         var mediumEditor = new MediumEditor(editorElement, {
-            placeholder: 'Enter text'
+            buttons: ['bold', 'italic', 'anchor', 'header1', 'header2', 'quote']
         });
         var self = this;
         mediumEditor.on(editorElement, 'input', function() {
